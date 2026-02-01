@@ -49,12 +49,13 @@ add ""
 add "## 🌤️ Weather"
 add ""
 
-# Fetch weather from wttr.in (compact format)
-WEATHER=$(curl -s "wttr.in/${LOCATION}?format=%l:+%c+%t+%h+humidity,+feels+like+%f" 2>/dev/null || echo "Weather unavailable")
-WEATHER_DETAIL=$(curl -s "wttr.in/${LOCATION}?format=%C,+wind+%w" 2>/dev/null || echo "")
+# Fetch weather from wttr.in (compact format, URL encode the location)
+LOCATION_ENCODED=$(echo "$LOCATION" | sed 's/ /%20/g')
+WEATHER=$(curl -s --max-time 5 "wttr.in/${LOCATION_ENCODED}?format=%l:+%c+%t" 2>/dev/null || echo "")
+WEATHER_DETAIL=$(curl -s --max-time 5 "wttr.in/${LOCATION_ENCODED}?format=%C,+humidity+%h,+wind+%w" 2>/dev/null || echo "")
 
-if [[ "$WEATHER" != "Weather unavailable" ]]; then
-    add "$WEATHER"
+if [[ -n "$WEATHER" && "$WEATHER" != *"Unknown"* ]]; then
+    add "**$WEATHER**"
     if [[ -n "$WEATHER_DETAIL" ]]; then
         add "*$WEATHER_DETAIL*"
     fi
@@ -158,10 +159,10 @@ if [[ -f "$JOB_FILE" ]]; then
     if [[ "$TOP_PICKS" -gt 0 ]]; then
         add ""
         add "**Best Matches:**"
-        grep -B1 "PERFECT FIT\|EXCELLENT FIT" "$JOB_FILE" 2>/dev/null | grep "^### " | head -3 | while read -r line; do
-            TITLE=$(echo "$line" | sed 's/^### [0-9]*\. /• /' | sed 's/ ⭐.*//')
-            add "$TITLE"
-        done
+        MATCHES=$(grep -B1 "PERFECT FIT\|EXCELLENT FIT" "$JOB_FILE" 2>/dev/null | grep "^### " | head -3 | sed 's/^### [0-9]*\. /• /' | sed 's/ ⭐.*//' || echo "")
+        if [[ -n "$MATCHES" ]]; then
+            add "$MATCHES"
+        fi
     fi
     
     # Check for application tracking if exists
