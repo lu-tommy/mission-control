@@ -530,5 +530,14 @@
         "resume": 1
       }
     }
+  },
+  "jobSearch": {
+    "total": 3,
+    "active": 3,
+    "applied": 0,
+    "inProgress": 0,
+    "offers": 0,
+    "rejected": 0,
+    "lastUpdated": "2026-02-01T00:46:53-05:00"
   }
 }

@@ -1,8 +1,55 @@
 {
-  "applications": [],
-  "statuses": ["discovered", "applied", "phone_screen", "interview", "offer", "rejected"],
+  "applications": [
+    {
+      "id": "1769924813",
+      "company": "Stripe",
+      "role": "Senior BI Analyst",
+      "url": "https://stripe.com/jobs/123",
+      "status": "discovered",
+      "dateAdded": "2026-02-01",
+      "dateApplied": null,
+      "resumeVersion": null,
+      "lastAction": "2026-02-01",
+      "followUpDate": null,
+      "notes": []
+    },
+    {
+      "id": "1769924813",
+      "company": "Airbnb",
+      "role": "Data Analyst",
+      "url": "https://airbnb.com/careers/456",
+      "status": "discovered",
+      "dateAdded": "2026-02-01",
+      "dateApplied": null,
+      "resumeVersion": null,
+      "lastAction": "2026-02-01",
+      "followUpDate": null,
+      "notes": []
+    },
+    {
+      "id": "1769924813",
+      "company": "Notion",
+      "role": "Operations Analyst",
+      "url": "https://notion.so/jobs/789",
+      "status": "discovered",
+      "dateAdded": "2026-02-01",
+      "dateApplied": null,
+      "resumeVersion": null,
+      "lastAction": "2026-02-01",
+      "followUpDate": null,
+      "notes": []
+    }
+  ],
+  "statuses": [
+    "discovered",
+    "applied",
+    "phone_screen",
+    "interview",
+    "offer",
+    "rejected"
+  ],
   "metadata": {
     "created": "2025-07-19",
-    "last_updated": "2025-07-19"
+    "last_updated": "2026-02-01"
   }
 }
