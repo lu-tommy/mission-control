@@ -5,13 +5,18 @@
       "company": "Stripe",
       "role": "Senior BI Analyst",
       "url": "https://stripe.com/jobs/123",
-      "status": "discovered",
+      "status": "applied",
       "dateAdded": "2026-02-01",
-      "dateApplied": null,
-      "resumeVersion": null,
+      "dateApplied": "2026-02-01",
+      "resumeVersion": "bi-analyst-v2",
       "lastAction": "2026-02-01",
       "followUpDate": null,
-      "notes": []
+      "notes": [
+        {
+          "date": "2026-02-01",
+          "text": "Recruiter mentioned 2-week timeline"
+        }
+      ]
     },
     {
       "id": "1769924813",
