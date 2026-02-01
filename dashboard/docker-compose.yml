@@ -1,0 +1,18 @@
+version: '3.8'
+
+services:
+  dashboard:
+    build: .
+    container_name: larry-dashboard
+    restart: unless-stopped
+    ports:
+      - "8888:8888"
+    volumes:
+      # Mount the dashboard folder to auto-update when files change
+      - .:/usr/share/nginx/html
+    networks:
+      - dashboard-net
+
+networks:
+  dashboard-net:
+    driver: bridge
