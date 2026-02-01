@@ -1,0 +1,22 @@
+{
+  "applications": [
+    {
+      "id": "app-001",
+      "company": "Example Inc",
+      "role": "BI Analyst",
+      "source": "linkedin/indeed/glassdoor",
+      "url": "job listing URL",
+      "status": "discovery/applied/interviewing/offer/rejected/withdrawn",
+      "appliedDate": "2026-02-01",
+      "resumeVersion": "v1.2",
+      "notes": "key requirements, fit score 8/10",
+      "followups": [],
+      "createdAt": "2026-02-01T12:00:00Z"
+    }
+  ],
+  "stats": {
+    "total": 0,
+    "byStatus": {},
+    "bySource": {}
+  }
+}

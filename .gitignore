@@ -3,6 +3,8 @@ kalshi-config.secret.json
 *.secret.json
 *.secret
 *.key
+.env.secrets
+*.env.*
 
 # Trash & temp
 .trash/

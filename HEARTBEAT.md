@@ -9,15 +9,16 @@
 
 **Every heartbeat or idle moment:**
 1. Read `larry-status.json` for current tasks
-2. Pick highest priority task from backlog
-3. Work on it, update progress in real-time
-4. Log activity so Tommy can see what I'm doing
+2. Pick highest priority task from backlog (high > medium > low)
+3. Move task to `inProgress`, set `larryStatus: "working"`
+4. Work on it, update progress in real-time
+5. When done: move to `done`, log completion, set `larryStatus: "idle"`
+6. If no tasks: reply HEARTBEAT_OK
 
 **For large projects:**
 - Break into subtasks with clear steps
-- Note if sub-agents needed (and why)
-- Estimate time for each subtask
-- Track actual time spent
+- Use sessions_spawn for GLM execution
+- Estimate time, track actual spent
 
 ## 🌙 OVERNIGHT MODE (12am - 7am EST)
 **Tommy wants SURPRISES when he wakes up. Build things, don't just check things.**

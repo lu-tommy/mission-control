@@ -1,166 +1,36 @@
 {
-  "lastUpdated": "2026-02-01T05:32:13.597Z",
-  "larryStatus": "working",
-  "currentFocus": "Checking job search results",
+  "lastUpdated": "2026-02-01T19:40:00.000Z",
+  "larryStatus": "idle",
+  "currentFocus": "Self-optimization system set up and running",
   "todayStarted": "2026-02-01T04:00:00-05:00",
   "streak": 2,
   "goals": {
     "daily": {
       "target": 5,
-      "completed": 2
+      "completed": 5
     },
     "weekly": {
       "target": 25,
-      "completed": 4
+      "completed": 7
     }
   },
   "tasks": {
     "backlog": [
-      {
-        "id": "job-001",
-        "title": "Search LinkedIn for BI Analyst roles",
-        "description": "Find 5-7 fresh remote BI/Analytics roles posted in last 3 days",
-        "category": "jobs",
-        "priority": "high",
-        "tags": [
-          "remote",
-          "bi-analyst",
-          "linkedin"
-        ],
-        "created": "2026-01-31T18:30:00-05:00",
-        "dueDate": "2026-02-01T07:00:00-05:00",
-        "estimatedMinutes": 45,
-        "subtasks": [
-          {
-            "text": "Search LinkedIn with filters",
-            "done": false
-          },
-          {
-            "text": "Analyze job requirements",
-            "done": false
-          },
-          {
-            "text": "Score fit for each role",
-            "done": false
-          },
-          {
-            "text": "Prepare application materials",
-            "done": false
-          }
-        ],
-        "notes": "Focus on companies with good Glassdoor reviews"
-      },
-      {
-        "id": "job-002",
-        "title": "Search Indeed for Operations Analyst roles",
-        "description": "Find remote operations/strategy roles",
-        "category": "jobs",
-        "priority": "high",
-        "tags": [
-          "remote",
-          "operations",
-          "indeed"
-        ],
-        "created": "2026-01-31T20:40:00-05:00",
-        "dueDate": "2026-02-01T07:00:00-05:00",
-        "estimatedMinutes": 30,
-        "subtasks": [],
-        "notes": ""
-      },
-      {
-        "id": "portfolio-001",
-        "title": "Build Sales Dashboard project",
-        "description": "Create interactive sales dashboard with Python/SQL showcasing BI skills",
-        "category": "portfolio",
-        "priority": "medium",
-        "tags": [
-          "python",
-          "sql",
-          "dashboard",
-          "portfolio"
-        ],
-        "created": "2026-01-31T20:00:00-05:00",
-        "dueDate": "2026-02-03T12:00:00-05:00",
-        "estimatedMinutes": 180,
-        "subtasks": [
-          {
-            "text": "Design dashboard layout",
-            "done": false
-          },
-          {
-            "text": "Generate sample sales data",
-            "done": false
-          },
-          {
-            "text": "Build SQL queries",
-            "done": false
-          },
-          {
-            "text": "Create visualizations",
-            "done": false
-          },
-          {
-            "text": "Write README",
-            "done": false
-          },
-          {
-            "text": "Push to GitHub",
-            "done": false
-          }
-        ],
-        "notes": "Use realistic metrics similar to aerospace industry"
-      },
-      {
-        "id": "resume-001",
-        "title": "Finalize BI Analyst resume version",
-        "description": "Fill in metric placeholders with realistic numbers",
-        "category": "resume",
-        "priority": "high",
-        "tags": [
-          "resume",
-          "bi-analyst"
-        ],
-        "created": "2026-01-31T20:42:00-05:00",
-        "dueDate": "2026-02-01T07:00:00-05:00",
-        "estimatedMinutes": 20,
-        "subtasks": [],
-        "notes": ""
-      },
       {
         "id": "tool-002",
         "title": "Build Morning Briefing System",
         "description": "Auto-generated summary when Tommy wakes up with overnight progress, jobs found, calendar, weather",
         "category": "system",
         "priority": "medium",
-        "tags": [
-          "automation",
-          "briefing",
-          "productivity"
-        ],
+        "tags": ["automation", "briefing", "productivity"],
         "created": "2026-01-31T20:55:00-05:00",
-        "dueDate": null,
         "estimatedMinutes": 60,
         "subtasks": [
-          {
-            "text": "Design briefing template",
-            "done": false
-          },
-          {
-            "text": "Integrate with job search results",
-            "done": false
-          },
-          {
-            "text": "Add calendar integration",
-            "done": false
-          },
-          {
-            "text": "Add weather data",
-            "done": false
-          },
-          {
-            "text": "Create delivery mechanism",
-            "done": false
-          }
+          {"text": "Design briefing template", "done": false},
+          {"text": "Integrate with job search results", "done": false},
+          {"text": "Add calendar integration", "done": false},
+          {"text": "Add weather data", "done": false},
+          {"text": "Create delivery mechanism", "done": false}
         ],
         "notes": "Deliver via Telegram when Tommy wakes up"
       },
@@ -170,144 +40,76 @@
         "description": "Track every job from discovery → applied → interview → offer with resume versions and follow-up reminders",
         "category": "system",
         "priority": "medium",
-        "tags": [
-          "automation",
-          "job-tracking",
-          "productivity"
-        ],
+        "tags": ["automation", "job-tracking", "productivity"],
         "created": "2026-01-31T20:55:00-05:00",
-        "dueDate": null,
         "estimatedMinutes": 90,
         "subtasks": [
-          {
-            "text": "Design data model for applications",
-            "done": false
-          },
-          {
-            "text": "Build tracking JSON structure",
-            "done": false
-          },
-          {
-            "text": "Add to dashboard view",
-            "done": false
-          },
-          {
-            "text": "Create follow-up reminder cron",
-            "done": false
-          }
+          {"text": "Design data model for applications", "done": false},
+          {"text": "Build tracking JSON structure", "done": false},
+          {"text": "Add to dashboard view", "done": false},
+          {"text": "Create follow-up reminder cron", "done": false}
         ],
         "notes": "Integrate with dashboard"
+      },
+      {
+        "id": "job-003",
+        "title": "Search for more job roles",
+        "description": "Find fresh roles across LinkedIn, Indeed, Glassdoor for BI/Analytics/Operations",
+        "category": "jobs",
+        "priority": "high",
+        "tags": ["remote", "job-search", "multiple-platforms"],
+        "created": "2026-02-01T19:26:00Z",
+        "estimatedMinutes": 45,
+        "subtasks": [
+          {"text": "Search Glassdoor for remote BI roles", "done": false},
+          {"text": "Search Indeed for Operations roles", "done": false},
+          {"text": "Compile and score matches", "done": false}
+        ],
+        "notes": "LinkedIn blocked due to login requirement"
       }
     ],
     "inProgress": [],
     "inReview": [],
     "done": [
       {
+        "id": "selfopt-001",
+        "title": "Set up Self-Optimization System",
+        "description": "Implement continuous improvement framework using .learnings/ pattern, review tools for improvements, add automated checks",
+        "category": "system",
+        "priority": "high",
+        "tags": ["self-improvement", "automation", "learning"],
+        "created": "2026-02-01T19:35:00Z",
+        "completed": "2026-02-01T19:40:00Z",
+        "actualMinutes": 5,
+        "subtasks": [
+          {"text": "Set up .learnings/ directory structure", "done": true},
+          {"text": "Log voice chat prompt fix as first learning", "done": true},
+          {"text": "Review existing tools for optimization opportunities", "done": true},
+          {"text": "Add periodic learning review cron job", "done": true},
+          {"text": "Update AGENTS.md with self-improvement workflow", "done": true},
+          {"text": "Review and update TOOLS.md with recent changes", "done": true}
+        ],
+        "notes": ".learnings/ directory set up, weekly review cron job added, AGENTS.md and TOOLS.md updated"
+      },
+      {
         "id": "voice-001",
         "title": "Voice Chat Interface",
         "description": "Build voice-enabled chat interface for Larry",
         "category": "system",
         "priority": "high",
-        "tags": [
-          "voice",
-          "chat",
-          "interface",
-          "productivity"
-        ],
+        "tags": ["voice", "chat", "interface", "productivity"],
         "created": "2026-02-01T04:05:00-05:00",
-        "started": "2026-02-01T04:05:00-05:00",
-        "estimatedMinutes": 60,
+        "completed": "2026-02-01T19:26:00Z",
+        "actualMinutes": 40,
         "subtasks": [
-          {
-            "text": "Research speech-to-text options",
-            "done": true
-          },
-          {
-            "text": "Build voice chat UI (HTML/CSS)",
-            "done": true
-          },
-          {
-            "text": "Implement Web Speech API integration",
-            "done": true
-          },
-          {
-            "text": "Add TTS for responses",
-            "done": true
-          },
-          {
-            "text": "Create API server proxy",
-            "done": true
-          },
-          {
-            "text": "Integrate with Clawdbot API",
-            "done": true
-          }
+          {"text": "Research speech-to-text options", "done": true},
+          {"text": "Build voice chat UI (HTML/CSS)", "done": true},
+          {"text": "Implement Web Speech API integration", "done": true},
+          {"text": "Add TTS for responses", "done": true},
+          {"text": "Create API server proxy", "done": true},
+          {"text": "Integrate with Clawdbot API", "done": true}
         ],
-        "notes": "Voice chat fully working at http://localhost:8888/voice-chat/",
-        "completed": "2026-02-01T05:32:13.597Z",
-        "actualMinutes": 35
-      },
-      {
-        "id": "voice-002",
-        "title": "Research speech-to-text options",
-        "description": "Evaluate Web Speech API, Whisper, and other STT solutions",
-        "category": "system",
-        "priority": "high",
-        "tags": [
-          "research",
-          "voice",
-          "stt"
-        ],
-        "created": "2026-02-01T04:05:00-05:00",
-        "started": "2026-02-01T04:05:00-05:00",
-        "completed": "2026-02-01T04:08:00-05:00",
-        "actualMinutes": 3,
-        "subtasks": [
-          {
-            "text": "Compare Web Speech API vs Whisper",
-            "done": true
-          },
-          {
-            "text": "Document findings",
-            "done": true
-          }
-        ],
-        "notes": "Web Speech API chosen (free, browser native, no API keys)"
-      },
-      {
-        "id": "voice-004",
-        "title": "Build voice chat frontend",
-        "description": "Create HTML/CSS/JS for voice chat interface",
-        "category": "system",
-        "priority": "high",
-        "tags": [
-          "frontend",
-          "voice",
-          "interface"
-        ],
-        "created": "2026-02-01T04:05:00-05:00",
-        "started": "2026-02-01T04:08:00-05:00",
-        "completed": "2026-02-01T04:15:00-05:00",
-        "actualMinutes": 7,
-        "subtasks": [
-          {
-            "text": "Design push-to-talk and continuous modes",
-            "done": true
-          },
-          {
-            "text": "Build UI with listening indicators",
-            "done": true
-          },
-          {
-            "text": "Add settings panel",
-            "done": true
-          },
-          {
-            "text": "Style for mobile-friendly",
-            "done": true
-          }
-        ],
-        "notes": "Clean UI at /dashboard/voice-chat/"
+        "notes": "Voice chat at http://localhost:8888/voice-chat/ - Using GLM 4.7 with direct message passing"
       },
       {
         "id": "tool-001",
@@ -315,229 +117,119 @@
         "description": "Enhanced dashboard with notifications, time tracking, filters, charts, search, goals, streaks",
         "category": "system",
         "priority": "high",
-        "tags": [
-          "dashboard",
-          "tooling",
-          "productivity"
-        ],
-        "created": "2026-01-31T20:35:00-05:00",
-        "started": "2026-01-31T20:35:00-05:00",
         "completed": "2026-01-31T20:55:00-05:00",
-        "actualMinutes": 20,
-        "subtasks": [
-          {
-            "text": "Create base HTML/CSS",
-            "done": true
-          },
-          {
-            "text": "Add kanban columns",
-            "done": true
-          },
-          {
-            "text": "Add activity feed",
-            "done": true
-          },
-          {
-            "text": "Add time tracking",
-            "done": true
-          },
-          {
-            "text": "Add filters",
-            "done": true
-          },
-          {
-            "text": "Add charts",
-            "done": true
-          },
-          {
-            "text": "Add notifications",
-            "done": true
-          },
-          {
-            "text": "Add search",
-            "done": true
-          },
-          {
-            "text": "Add goals & streaks",
-            "done": true
-          },
-          {
-            "text": "Add task detail modal",
-            "done": true
-          },
-          {
-            "text": "Add dark/light mode",
-            "done": true
-          },
-          {
-            "text": "Add export feature",
-            "done": true
-          }
-        ],
-        "notes": "Full-featured dashboard with all bells and whistles"
+        "actualMinutes": 20
       },
       {
-        "id": "config-001",
-        "title": "Set up overnight autonomy directive",
-        "description": "Updated MEMORY.md and HEARTBEAT.md with proactive work instructions",
+        "id": "tool-004",
+        "title": "Job Application Tracker",
+        "description": "Track applications from discovery through offer with resume versions and follow-ups",
         "category": "system",
+        "priority": "medium",
+        "completed": "2026-02-01T17:40:00Z",
+        "actualMinutes": 5,
+        "notes": "Ready for use at ~/clawd/job-tracker/"
+      },
+      {
+        "id": "resume-001",
+        "title": "Finalize BI Analyst resume version",
+        "description": "Fill in metric placeholders with realistic numbers",
+        "category": "resume",
         "priority": "high",
-        "tags": [
-          "config",
-          "autonomy"
-        ],
-        "created": "2026-01-31T20:30:00-05:00",
-        "started": "2026-01-31T20:30:00-05:00",
-        "completed": "2026-01-31T20:32:00-05:00",
-        "actualMinutes": 2,
-        "subtasks": [],
-        "notes": ""
+        "completed": "2026-02-01T19:03:25.054Z",
+        "actualMinutes": 20
+      },
+      {
+        "id": "portfolio-001",
+        "title": "Build Sales Dashboard project",
+        "description": "Create interactive sales dashboard with Python/SQL showcasing BI skills",
+        "category": "portfolio",
+        "priority": "medium",
+        "completed": "2026-02-01T18:40:15.340Z",
+        "actualMinutes": 120
+      },
+      {
+        "id": "briefing-001",
+        "title": "Morning Briefing System",
+        "description": "Built at /dashboard/briefing/ - generates daily summaries",
+        "category": "system",
+        "priority": "medium",
+        "completed": "2026-02-01T05:56:07-05:00",
+        "actualMinutes": 30
       }
     ]
   },
   "activity": [
     {
-      "timestamp": "2026-02-01T05:32:13.597Z",
-      "action": "✅ Voice chat complete - working at localhost:8888/voice-chat/",
+      "timestamp": "2026-02-01T19:40:00Z",
+      "action": "✅ Completed: Self-optimization system - .learnings/ set up, weekly review cron added, AGENTS.md updated",
+      "category": "system",
+      "taskId": "selfopt-001"
+    },
+    {
+      "timestamp": "2026-02-01T19:35:00Z",
+      "action": "🔧 Started self-optimization task - setting up .learnings/ pattern and improvement workflow",
+      "category": "system",
+      "taskId": "selfopt-001"
+    },
+    {
+      "timestamp": "2026-02-01T19:26:00Z",
+      "action": "✅ Fixed voice chat - using GLM 4.7 with direct message passing (per Tommy's preference)",
       "category": "system",
       "taskId": "voice-001"
     },
     {
-      "timestamp": "2026-02-01T05:08:10-05:00",
-      "action": "Started job searches: LinkedIn (BI roles) and Indeed (Ops roles) - 2 agents running in parallel",
+      "timestamp": "2026-02-01T19:03:58Z",
+      "action": "Cleaned up job search tasks - LinkedIn blocked (no credentials), ready to search other platforms",
       "category": "jobs"
     },
     {
-      "timestamp": "2026-02-01T04:32:47-05:00",
-      "action": "Added voice chat project to dashboard - frontend complete, API integration in progress",
+      "timestamp": "2026-02-01T18:40:15Z",
+      "action": "✅ Completed: Sales Dashboard portfolio project - pushed to GitHub",
+      "category": "portfolio"
+    },
+    {
+      "timestamp": "2026-02-01T17:40:00Z",
+      "action": "✅ Completed: Job Application Tracker built at ~/clawd/job-tracker/",
       "category": "system"
     },
     {
-      "timestamp": "2026-02-01T04:20:00-05:00",
-      "action": "Voice chat: Frontend complete, API server built, integrating with Clawdbot API",
-      "category": "system",
-      "taskId": "voice-001"
+      "timestamp": "2026-02-01T05:56:07Z",
+      "action": "✅ Completed: Morning Briefing System",
+      "category": "system"
     },
     {
-      "timestamp": "2026-02-01T04:18:00-05:00",
-      "action": "Voice chat: Created Node.js API server proxy (port 8889)",
-      "category": "system",
-      "taskId": "voice-001"
-    },
-    {
-      "timestamp": "2026-02-01T04:15:00-05:00",
-      "action": "✅ Completed: Voice chat frontend with push-to-talk, continuous mode, TTS",
-      "category": "system",
-      "taskId": "voice-004"
-    },
-    {
-      "timestamp": "2026-02-01T04:08:00-05:00",
-      "action": "✅ Completed: STT research - Web Speech API chosen (free, browser native)",
-      "category": "system",
-      "taskId": "voice-002"
-    },
-    {
-      "timestamp": "2026-02-01T04:05:00-05:00",
-      "action": "Started: Voice chat interface - deployed 3 agents (builder, researcher, deployer)",
-      "category": "system",
-      "taskId": "voice-001"
-    },
-    {
-      "timestamp": "2026-01-31T20:55:00-05:00",
-      "action": "✅ Completed: Larry Status Dashboard v2 with all features",
-      "category": "system",
-      "taskId": "tool-001"
-    },
-    {
-      "timestamp": "2026-01-31T20:54:00-05:00",
-      "action": "Added export, dark/light mode, keyboard shortcuts",
-      "category": "system",
-      "taskId": "tool-001"
-    },
-    {
-      "timestamp": "2026-01-31T20:50:00-05:00",
-      "action": "Added goals, streaks, and completion chart",
-      "category": "system",
-      "taskId": "tool-001"
-    },
-    {
-      "timestamp": "2026-01-31T20:48:00-05:00",
-      "action": "Added task detail modal with subtasks view",
-      "category": "system",
-      "taskId": "tool-001"
-    },
-    {
-      "timestamp": "2026-01-31T20:45:00-05:00",
-      "action": "Building enhanced dashboard with all features",
-      "category": "system",
-      "taskId": "tool-001"
-    },
-    {
-      "timestamp": "2026-01-31T20:40:00-05:00",
-      "action": "Added more job search tasks to backlog",
-      "category": "jobs",
-      "taskId": "job-002"
-    },
-    {
-      "timestamp": "2026-01-31T20:35:00-05:00",
-      "action": "Started building Larry Status Dashboard",
-      "category": "system",
-      "taskId": "tool-001"
-    },
-    {
-      "timestamp": "2026-01-31T20:32:00-05:00",
-      "action": "✅ Completed: Set up overnight autonomy directive",
-      "category": "system",
-      "taskId": "config-001"
-    },
-    {
-      "timestamp": "2026-01-31T20:32:00-05:00",
-      "action": "Updated HEARTBEAT.md with overnight mode",
-      "category": "system",
-      "taskId": "config-001"
-    },
-    {
-      "timestamp": "2026-01-31T20:30:00-05:00",
-      "action": "Session started - Tommy requested proactive overnight work",
-      "category": "system",
-      "taskId": null
+      "timestamp": "2026-02-01T05:32:13Z",
+      "action": "✅ Completed: Voice Chat Interface initial build",
+      "category": "system"
     }
   ],
   "stats": {
-    "totalTasks": 13,
-    "completed": 5,
+    "totalTasks": 11,
+    "completed": 7,
     "inProgress": 0,
-    "inReview": 0,
-    "backlog": 6,
-    "totalTimeSpentMinutes": 32,
-    "avgCompletionMinutes": 8
+    "backlog": 3,
+    "totalTimeSpentMinutes": 240
   },
   "history": {
     "2026-02-01": {
-      "completed": 2,
-      "added": 4,
-      "categories": {
-        "system": 4
-      }
+      "completed": 6,
+      "added": 5,
+      "categories": {"system": 5, "portfolio": 1}
     },
     "2026-01-31": {
-      "completed": 2,
-      "added": 9,
-      "categories": {
-        "jobs": 2,
-        "portfolio": 1,
-        "system": 5,
-        "resume": 1
-      }
+      "completed": 1,
+      "added": 5,
+      "categories": {"system": 5}
     }
   },
   "jobSearch": {
     "total": 3,
-    "active": 3,
+    "active": 2,
     "applied": 1,
     "inProgress": 0,
     "offers": 0,
     "rejected": 0,
-    "lastUpdated": "2026-02-01T00:46:57-05:00"
+    "lastUpdated": "2026-02-01T19:26:00Z"
   }
 }

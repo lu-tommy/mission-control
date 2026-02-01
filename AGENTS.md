@@ -246,3 +246,65 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
+
+---
+
+## 🔄 Self-Improvement Workflow
+
+Continuous improvement is how you get better. Log learnings, errors, and discoveries in `.learnings/` directory.
+
+### When to Log Something
+
+**Always log when:**
+- User corrects you ("No, that's wrong...", "Actually...")
+- A command fails unexpectedly
+- You discover a better approach to a recurring task
+- You realize your knowledge is outdated
+- You try something that doesn't work and find a fix
+
+**Log format** (append to `.learnings/LEARNINGS.md`):
+```markdown
+## [LRN-YYYYMMDD-XXX] brief-title
+
+**Logged**: ISO timestamp
+**Priority**: low|medium|high|critical
+**Status**: pending|resolved|promoted
+**Area**: frontend|backend|infra|config|docs
+
+### Summary
+One-line description
+
+### Details
+What happened, what was wrong, what's correct
+
+### Fix/Suggested Action
+Specific solution
+
+### Metadata
+- Source: user_feedback|error|discovery
+- Related Files: path/to/file
+- Tags: tag1, tag2
+---
+```
+
+### Promoting Learnings
+
+When a learning is broadly applicable, promote it:
+
+| Where | What Goes There |
+|-------|----------------|
+| `AGENTS.md` | Workflows, delegation patterns, self-improvement rules |
+| `TOOLS.md` | Tool gotchas, usage patterns, integration issues |
+| `SOUL.md` | Behavioral guidelines, communication style |
+| `MEMORY.md` | Key facts about Tommy, preferences |
+
+### Automatic Review
+
+Cron job `learning-review` runs **Saturdays at 6pm**:
+- Reviews `.learnings/LEARNINGS.md` and `.learnings/ERRORS.md`
+- Promotes high-value learnings to appropriate files
+- Marks resolved items
+
+### Key Principle
+
+**Text > Brain** — if it's worth remembering, write it down. Files persist; mental notes don't.

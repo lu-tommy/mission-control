@@ -154,6 +154,20 @@ done
 - Token stored in TOOLS.md for local access only
 - **Security:** Never share this token in public contexts
 
+### ElevenLabs (TTS)
+- **Location:** `~/clawd/.env.secrets`
+- **Status:** ✅ Configured
+- **Voice Chat:** http://localhost:8888/voice-chat/
+- **Security:** Never share this token in public contexts
+
+### Voice Chat
+- **URL:** http://localhost:8888/voice-chat/
+- **Server:** `~/clawd/dashboard/voice-chat/server.js`
+- **Port:** 8889 (API)
+- **Model:** zai/glm-4.7 (user preference)
+- **Prompt Strategy:** Pass message directly to `sessions_spawn` without wrapper for accurate responses
+- **Settings:** `thinking: 'low'` for balanced speed/quality
+
 ## Skills & Their Uses
 
 | Skill | Purpose | Key Commands |
