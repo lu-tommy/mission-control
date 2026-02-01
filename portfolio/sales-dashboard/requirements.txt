@@ -1,0 +1,16 @@
+# Sales Dashboard Dependencies
+# Install with: pip install -r requirements.txt
+
+# Data Processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Database
+sqlalchemy>=2.0.0
+
+# Visualization
+plotly>=5.18.0
+streamlit>=1.29.0
+
+# Utilities
+python-dateutil>=2.8.0

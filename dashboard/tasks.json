@@ -1,0 +1,46 @@
+{
+  "active": [
+    {
+      "id": "dash-1",
+      "title": "Canvas Dashboard System",
+      "progress": 20,
+      "status": "in-progress",
+      "priority": "high",
+      "tasks": [
+        "✅ Create project structure",
+        "✅ Build data model",
+        "🔄 Create canvas renderer",
+        "⏳ Add interactivity",
+        "⏳ Integrate with workflows"
+      ]
+    }
+  ],
+  "completed": [
+    {
+      "id": "kalshi-1",
+      "title": "Fixed Kalshi risk management",
+      "completedAt": "2025-01-30",
+      "description": "Renamed duplicate method, fixed calculation bug"
+    },
+    {
+      "id": "docs-1",
+      "title": "Updated TOOLS.md",
+      "completedAt": "2025-01-29",
+      "description": "Added trading bot status commands, monitoring schedule"
+    }
+  ],
+  "upNext": [
+    {
+      "id": "idea-1",
+      "title": "Automated trade reports",
+      "priority": "medium",
+      "description": "Daily email with P&L, positions, and signals"
+    },
+    {
+      "id": "idea-2",
+      "title": "SPY benchmark improvement",
+      "priority": "low",
+      "description": "Research better benchmarking strategies"
+    }
+  ]
+}

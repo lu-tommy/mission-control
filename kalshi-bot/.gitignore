@@ -1,0 +1,36 @@
+# Environment variables
+.env
+
+# Bot state
+bot_state.json
+*.json
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Virtual environment
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# Credentials (in case they're accidentally placed in bot dir)
+*.secret.json
+.secret.json

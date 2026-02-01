@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "skills": {
+    "self-improving-agent": {
+      "version": "1.0.2",
+      "installedAt": 1769822247662
+    },
+    "job-auto-apply": {
+      "version": "1.0.0",
+      "installedAt": 1769900466852
+    }
+  }
+}

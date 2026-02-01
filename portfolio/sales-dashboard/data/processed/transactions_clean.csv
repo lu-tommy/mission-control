@@ -1,0 +1,81 @@
+transaction_id,customer_id,product_id,rep_id,deal_value,quantity,discount_pct,status,stage,created_date,close_date,expected_close_date,lead_source,notes
+T001,C001,P001,R003,142500,2,0.05,Closed Won,Closed,2023-01-10,2023-03-15,2023-03-20,Referral,Multi-year deal with expansion potential
+T002,C002,P002,R001,40500,1,0.1,Closed Won,Closed,2023-01-15,2023-02-28,2023-03-01,Website,Quick sales cycle - urgent need
+T003,C003,P006,R001,16200,1,0.1,Closed Won,Closed,2023-01-20,2023-02-10,2023-02-15,Trade Show,SMB quick win
+T004,C004,P009,R006,161500,2,0.05,Closed Won,Closed,2023-01-25,2023-04-20,2023-04-15,Outbound,Large healthcare data project
+T005,C005,P003,R005,28800,1,0.1,Closed Won,Closed,2023-02-01,2023-03-10,2023-03-15,Website,Retail integration project
+T006,C006,P001,R002,71250,1,0.05,Closed Won,Closed,2023-02-05,2023-04-25,2023-05-01,Referral,Energy sector expansion
+T007,C007,P002,R003,42750,1,0.05,Closed Won,Closed,2023-02-10,2023-03-20,2023-03-25,LinkedIn,Financial services analytics
+T008,C008,P007,R001,10800,1,0.1,Closed Lost,Closed,2023-02-15,2023-03-25,2023-03-20,Website,Lost to competitor pricing
+T009,C009,P005,R008,46800,1,0.1,Closed Won,Closed,2023-02-20,2023-04-05,2023-04-10,Trade Show,Logistics automation
+T010,C010,P006,R002,16200,1,0.1,Closed Won,Closed,2023-02-25,2023-03-15,2023-03-20,Outbound,Construction reporting needs
+T011,C011,P007,R003,10800,1,0.1,Closed Won,Closed,2023-03-01,2023-03-28,2023-04-01,Referral,Legal mobile access
+T012,C012,P009,R009,161500,2,0.05,Closed Won,Closed,2023-03-05,2023-05-30,2023-06-01,Outbound,Major healthcare win
+T013,C013,P002,R008,40500,1,0.1,Closed Won,Closed,2023-03-10,2023-04-20,2023-04-25,Website,Consulting analytics
+T014,C014,P006,R005,16200,1,0.1,Closed Lost,Closed,2023-03-15,2023-04-30,2023-04-20,LinkedIn,Budget constraints
+T015,C015,P003,R004,28800,1,0.1,Closed Won,Closed,2023-03-20,2023-05-10,2023-05-15,Trade Show,Manufacturing integration
+T016,C016,P007,R005,10800,1,0.1,Closed Won,Closed,2023-03-25,2023-04-15,2023-04-20,Website,Restaurant mobile ordering
+T017,C017,P001,R006,213750,3,0.05,Closed Won,Closed,2023-04-01,2023-06-25,2023-06-30,Referral,Major bank platform deal
+T018,C018,P006,R007,16200,1,0.1,Closed Won,Closed,2023-04-05,2023-04-28,2023-05-01,Website,Travel reporting
+T019,C019,P002,R001,40500,1,0.1,Closed Won,Closed,2023-04-10,2023-05-20,2023-05-25,LinkedIn,VC portfolio analytics
+T020,C020,P001,R002,142500,2,0.05,Closed Won,Closed,2023-04-15,2023-07-10,2023-07-15,Outbound,Telecom platform expansion
+T021,C021,P009,R006,242250,3,0.05,Closed Won,Closed,2023-04-20,2023-07-28,2023-08-01,Referral,Pharma data warehouse - largest deal Q2
+T022,C022,P002,R009,40500,1,0.1,Closed Won,Closed,2023-04-25,2023-06-05,2023-06-10,Trade Show,Media analytics
+T023,C023,P006,R005,16200,1,0.1,Closed Won,Closed,2023-05-01,2023-05-25,2023-05-30,Website,Marketing reporting
+T024,C024,P003,R004,28800,1,0.1,Closed Won,Closed,2023-05-05,2023-06-15,2023-06-20,Outbound,Agriculture integration
+T025,C025,P001,R002,285000,4,0.05,Closed Won,Closed,2023-05-10,2023-08-20,2023-08-25,Referral,Aerospace multi-unit deal
+T026,C026,P005,R001,46800,1,0.1,Closed Won,Closed,2023-05-15,2023-06-28,2023-07-01,LinkedIn,Electronics automation
+T027,C027,P007,R003,10800,1,0.1,Closed Lost,Closed,2023-05-20,2023-07-05,2023-06-30,Website,Education budget cut
+T028,C028,P001,R008,142500,2,0.05,Closed Won,Closed,2023-05-25,2023-08-15,2023-08-20,Trade Show,Insurance platform
+T029,C029,P004,R005,25200,1,0.1,Closed Won,Closed,2023-06-01,2023-07-10,2023-07-15,Website,Security module for SMB
+T030,C030,P003,R007,28800,1,0.1,Closed Won,Closed,2023-06-05,2023-07-20,2023-07-25,Outbound,Environmental integration
+T031,C031,P005,R002,46800,1,0.1,Closed Won,Closed,2023-06-10,2023-08-05,2023-08-10,LinkedIn,Telecom automation
+T032,C032,P001,R003,142500,2,0.05,Closed Won,Closed,2023-06-15,2023-09-10,2023-09-15,Referral,Import/export platform
+T033,C033,P002,R007,40500,1,0.1,Closed Won,Closed,2023-06-20,2023-07-28,2023-08-01,Website,SMB analytics
+T034,C034,P003,R004,28800,1,0.1,Closed Won,Closed,2023-06-25,2023-08-15,2023-08-20,Trade Show,Manufacturing integration
+T035,C035,P009,R009,161500,2,0.05,Closed Won,Closed,2023-07-01,2023-09-28,2023-10-01,Outbound,Mining data warehouse
+T036,C036,P007,R005,10800,1,0.1,Closed Won,Closed,2023-07-05,2023-07-30,2023-08-05,Website,Sports mobile access
+T037,C037,P002,R001,40500,1,0.1,Closed Won,Closed,2023-07-10,2023-08-22,2023-08-25,LinkedIn,Display tech analytics
+T038,C038,P006,R007,16200,1,0.1,Closed Lost,Closed,2023-07-15,2023-09-01,2023-08-25,Website,Resort budget freeze
+T039,C039,P005,R006,93600,2,0.1,Closed Won,Closed,2023-07-20,2023-09-15,2023-09-20,Trade Show,Robotics automation
+T040,C040,P001,R008,213750,3,0.05,Closed Won,Closed,2023-07-25,2023-10-20,2023-10-25,Referral,Retail platform expansion
+T041,C041,P009,R002,242250,3,0.05,Closed Won,Closed,2023-08-01,2023-11-05,2023-11-10,Outbound,Major manufacturing DW
+T042,C042,P010,R009,58500,1,0.1,Closed Won,Closed,2023-08-05,2023-09-20,2023-09-25,LinkedIn,Research ML project
+T043,C043,P001,R006,356250,5,0.05,Closed Won,Closed,2023-08-10,2023-11-28,2023-12-01,Referral,Defense multi-site deal
+T044,C044,P003,R004,28800,1,0.1,Closed Won,Closed,2023-08-15,2023-09-30,2023-10-05,Trade Show,Transport integration
+T045,C045,P002,R007,40500,1,0.1,Closed Won,Closed,2023-08-20,2023-10-05,2023-10-10,Website,Navigation analytics
+T046,C046,P005,R003,46800,1,0.1,Closed Won,Closed,2023-08-25,2023-10-15,2023-10-20,LinkedIn,Real estate automation
+T047,C047,P007,R007,10800,1,0.1,Closed Won,Closed,2023-09-01,2023-09-28,2023-10-01,Website,SMB mobile quick win
+T048,C048,P006,R005,16200,1,0.1,Closed Won,Closed,2023-09-05,2023-10-10,2023-10-15,Outbound,Marine reporting
+T049,C049,P007,R007,10800,1,0.1,Closed Won,Closed,2023-09-10,2023-10-05,2023-10-10,Website,Outdoor retail mobile
+T050,C050,P003,R009,28800,1,0.1,Closed Won,Closed,2023-09-15,2023-10-28,2023-11-01,Trade Show,Mining integration
+T051,C001,P002,R003,85500,2,0.05,Closed Won,Closed,2023-09-20,2023-11-15,2023-11-20,Upsell,Expansion - analytics add-on
+T052,C004,P005,R006,93600,2,0.1,Closed Won,Closed,2023-09-25,2023-12-10,2023-12-15,Upsell,Healthcare automation expansion
+T053,C012,P010,R009,117000,2,0.1,Closed Won,Closed,2023-10-01,2023-12-20,2023-12-25,Upsell,ML toolkit for healthcare
+T054,C017,P004,R006,50400,2,0.1,Closed Won,Closed,2023-10-05,2023-12-05,2023-12-10,Upsell,Bank security module
+T055,C020,P002,R002,81000,2,0.1,Closed Won,Closed,2023-10-10,2023-12-18,2023-12-20,Upsell,Telecom analytics expansion
+T056,C021,P010,R006,175500,3,0.1,Closed Won,Closed,2023-10-15,2024-01-10,2024-01-15,Upsell,Pharma ML expansion
+T057,C025,P005,R002,93600,2,0.1,Closed Won,Closed,2023-10-20,2024-01-05,2024-01-10,Upsell,Aerospace automation
+T058,C028,P002,R008,81000,2,0.1,Closed Won,Closed,2023-10-25,2023-12-28,2024-01-01,Upsell,Insurance analytics
+T059,C032,P004,R003,50400,2,0.1,Closed Won,Closed,2023-11-01,2024-01-15,2024-01-20,Upsell,Trade security
+T060,C035,P005,R009,93600,2,0.1,Closed Won,Closed,2023-11-05,2024-01-28,2024-02-01,Upsell,Mining automation
+T061,C040,P002,R008,81000,2,0.1,Closed Won,Closed,2023-11-10,2024-01-20,2024-01-25,Upsell,Retail analytics expansion
+T062,C041,P010,R002,117000,2,0.1,Closed Won,Closed,2023-11-15,2024-02-05,2024-02-10,Upsell,Manufacturing ML
+T063,C043,P004,R006,75600,3,0.1,Closed Won,Closed,2023-11-20,2024-02-15,2024-02-20,Upsell,Defense security expansion
+T064,C002,P005,R001,46800,1,0.1,Closed Won,Closed,2023-11-25,2024-01-08,2024-01-10,Upsell,CloudFirst automation
+T065,C006,P002,R002,40500,1,0.1,Closed Won,Closed,2023-12-01,2024-02-12,2024-02-15,Upsell,Energy analytics
+T066,C009,P004,R008,25200,1,0.1,Closed Won,Closed,2023-12-05,2024-01-25,2024-01-30,Upsell,Logistics security
+T067,C013,P003,R008,28800,1,0.1,Closed Won,Closed,2023-12-10,2024-02-08,2024-02-15,Upsell,Consulting integration
+T068,C015,P005,R004,46800,1,0.1,Closed Won,Closed,2023-12-15,2024-02-20,2024-02-25,Upsell,Auto parts automation
+T069,C019,P003,R001,28800,1,0.1,Closed Won,Closed,2023-12-20,2024-02-05,2024-02-10,Upsell,VC integration
+T070,C022,P005,R009,46800,1,0.1,Closed Won,Closed,2023-12-25,2024-02-28,2024-03-01,Upsell,Media automation
+T071,C024,P002,R004,40500,1,0.1,Pipeline,Negotiation,2024-01-05,,,Website,Agriculture analytics - in progress
+T072,C026,P001,R001,71250,1,0.05,Pipeline,Proposal,2024-01-10,,,Trade Show,Electronics platform - proposal sent
+T073,C029,P005,R005,46800,1,0.1,Pipeline,Discovery,2024-01-15,,,Outbound,Security automation - early stage
+T074,C030,P002,R007,40500,1,0.1,Pipeline,Negotiation,2024-01-20,,,LinkedIn,Environmental analytics
+T075,C031,P001,R002,71250,1,0.05,Pipeline,Proposal,2024-01-25,,,Referral,Telecom platform expansion
+T076,C033,P005,R007,46800,1,0.1,Pipeline,Discovery,2024-02-01,,,Website,Analytics automation
+T077,C034,P009,R004,76500,1,0.1,Pipeline,Proposal,2024-02-05,,,Trade Show,Manufacturing DW
+T078,C036,P002,R005,40500,1,0.1,Pipeline,Qualification,2024-02-10,,,Outbound,Sports analytics
+T079,C037,P001,R001,71250,1,0.05,Pipeline,Negotiation,2024-02-15,,,LinkedIn,Display platform - near close
+T080,C038,P003,R007,28800,1,0.1,Pipeline,Discovery,2024-02-20,,,Website,Resort integration

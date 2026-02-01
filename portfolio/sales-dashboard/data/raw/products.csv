@@ -1,0 +1,11 @@
+product_id,product_name,category,base_price,implementation_fee,annual_support_pct
+P001,TechFlow Core Platform,Platform,75000,15000,0.18
+P002,TechFlow Analytics Suite,Analytics,45000,8000,0.15
+P003,TechFlow Integration Hub,Integration,32000,6000,0.15
+P004,TechFlow Security Module,Security,28000,5000,0.20
+P005,TechFlow Automation Engine,Automation,52000,10000,0.18
+P006,TechFlow Reporting Pro,Reporting,18000,3000,0.12
+P007,TechFlow Mobile Access,Mobile,12000,2000,0.15
+P008,TechFlow API Gateway,Integration,22000,4000,0.15
+P009,TechFlow Data Warehouse,Analytics,85000,18000,0.18
+P010,TechFlow ML Toolkit,Analytics,65000,12000,0.20

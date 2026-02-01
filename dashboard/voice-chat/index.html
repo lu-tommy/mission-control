@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>🦞 Larry Voice Chat</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="header">
+      <div class="header-left">
+        <span class="logo">🦞 Larry Voice</span>
+        <div class="status-badge" id="connectionStatus">
+          <span class="status-dot"></span>
+          <span id="connectionText">Connecting...</span>
+        </div>
+      </div>
+      <div class="header-right">
+        <button class="icon-btn" id="settingsBtn" title="Settings">⚙️</button>
+      </div>
+    </header>
+
+    <!-- Chat History -->
+    <div class="chat-container" id="chatContainer">
+      <div class="chat-messages" id="chatMessages">
+        <!-- Messages will be inserted here -->
+        <div class="message larry">
+          <div class="message-avatar">🦞</div>
+          <div class="message-content">
+            <div class="message-text">Hey Tommy! I'm ready to help. Just tap the microphone and start talking, or switch to continuous mode and I'll listen while you speak.</div>
+            <div class="message-time">Just now</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Listening Indicator -->
+    <div class="listening-indicator" id="listeningIndicator" style="display: none;">
+      <div class="pulse-ring"></div>
+      <div class="pulse-ring delay-1"></div>
+      <div class="pulse-ring delay-2"></div>
+      <div class="mic-icon">🎤</div>
+      <div class="listening-text">Listening...</div>
+    </div>
+
+    <!-- Processing Indicator -->
+    <div class="processing-indicator" id="processingIndicator" style="display: none;">
+      <div class="dots">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+      <div class="processing-text">Larry is thinking...</div>
+    </div>
+
+    <!-- Current Response Audio Player -->
+    <div class="audio-player" id="audioPlayer" style="display: none;">
+      <div class="audio-info">
+        <div class="audio-label">Larry's Response</div>
+        <div class="audio-time" id="audioTime">0:00 / 0:00</div>
+      </div>
+      <div class="audio-controls">
+        <button class="audio-btn" id="playPauseBtn">▶️</button>
+        <button class="audio-btn" id="stopBtn">⏹️</button>
+      </div>
+    </div>
+
+    <!-- Input Controls -->
+    <div class="input-section">
+      <!-- Mode Toggle -->
+      <div class="mode-toggle">
+        <button class="mode-btn active" data-mode="push" id="pushModeBtn">
+          <span class="mode-icon">🎯</span>
+          <span class="mode-label">Push-to-Talk</span>
+        </button>
+        <button class="mode-btn" data-mode="continuous" id="continuousModeBtn">
+          <span class="mode-icon">🔊</span>
+          <span class="mode-label">Continuous</span>
+        </button>
+      </div>
+
+      <!-- Push-to-Talk Button -->
+      <div class="ptt-section" id="pttSection">
+        <button class="ptt-button" id="pttButton">
+          <span class="ptt-icon">🎤</span>
+          <span class="ptt-label">Hold to Talk</span>
+        </button>
+      </div>
+
+      <!-- Continuous Mode Controls -->
+      <div class="continuous-controls" id="continuousControls" style="display: none;">
+        <button class="mic-button" id="micToggleBtn">
+          <span class="mic-icon" id="micIcon">🎤</span>
+        </button>
+      </div>
+
+      <!-- Transcription Preview -->
+      <div class="transcription-preview" id="transcriptionPreview" style="display: none;">
+        <div class="transcription-text" id="transcriptionText"></div>
+        <button class="send-btn" id="sendBtn">Send</button>
+        <button class="clear-btn" id="clearBtn">Clear</button>
+      </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settingsModal">
+      <div class="modal">
+        <div class="modal-header">
+          <h2>Settings</h2>
+          <button class="close-btn" id="closeSettingsBtn">&times;</button>
+        </div>
+        <div class="modal-body">
+          <div class="setting-group">
+            <label>STT Engine</label>
+            <select id="sttEngine">
+              <option value="web-speech">Web Speech API (Free)</option>
+              <option value="whisper">Whisper API</option>
+            </select>
+          </div>
+          <div class="setting-group">
+            <label>Audio Output</label>
+            <select id="audioOutput">
+              <option value="auto">Auto-detect</option>
+            </select>
+          </div>
+          <div class="setting-group">
+            <label>Speech Rate</label>
+            <input type="range" id="speechRate" min="0.5" max="2" step="0.1" value="1">
+            <span id="speechRateValue">1.0x</span>
+          </div>
+          <div class="setting-group">
+            <label>Transcript Language</label>
+            <select id="language">
+              <option value="en-US">English (US)</option>
+              <option value="en-GB">English (UK)</option>
+            </select>
+          </div>
+          <div class="setting-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="autoPlay" checked>
+              <span>Auto-play Larry's responses</span>
+            </label>
+          </div>
+          <div class="setting-group">
+            <label class="checkbox-label">
+              <input type="checkbox" id="saveHistory" checked>
+              <span>Save chat history</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="voice-chat.js"></script>
+</body>
+</html>

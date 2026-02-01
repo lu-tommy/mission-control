@@ -1,0 +1,51 @@
+customer_id,company_name,segment,industry,region,state,employee_count,annual_revenue,created_date
+C001,Apex Manufacturing Inc,Enterprise,Manufacturing,Northeast,NY,2500,450000000,2022-01-15
+C002,CloudFirst Technologies,Mid-Market,Technology,West,CA,380,52000000,2022-02-08
+C003,DataDrive Solutions,SMB,Technology,West,CA,45,6200000,2022-03-12
+C004,Eastern Healthcare Group,Enterprise,Healthcare,Northeast,MA,4200,890000000,2022-01-22
+C005,FreshMart Grocers,Mid-Market,Retail,Southeast,FL,620,78000000,2022-04-05
+C006,GreenField Energy,Enterprise,Energy,Southwest,TX,1800,320000000,2022-02-18
+C007,Harbor Financial Services,Mid-Market,Finance,Northeast,NY,290,41000000,2022-05-10
+C008,InnovateTech Labs,SMB,Technology,West,WA,28,3800000,2022-03-25
+C009,JetStream Logistics,Mid-Market,Logistics,Midwest,IL,510,65000000,2022-04-15
+C010,KeyStone Construction,SMB,Construction,Southwest,AZ,75,9500000,2022-06-01
+C011,LegalEase Partners,SMB,Legal,Northeast,NY,32,4200000,2022-05-20
+C012,MedCore Systems,Enterprise,Healthcare,West,CA,3100,720000000,2022-02-28
+C013,NorthStar Consulting,Mid-Market,Consulting,Midwest,IL,185,28000000,2022-06-12
+C014,Oakwood Properties,SMB,Real Estate,Southeast,GA,55,7800000,2022-07-08
+C015,PrecisionAuto Parts,Mid-Market,Manufacturing,Midwest,MI,420,58000000,2022-04-22
+C016,QuickServe Restaurants,SMB,Food Service,Southeast,FL,95,12000000,2022-08-01
+C017,Riverdale Bank,Enterprise,Finance,Northeast,NJ,1650,280000000,2022-03-15
+C018,SummitPeak Adventures,SMB,Travel,West,CO,38,4800000,2022-07-20
+C019,TechVenture Capital,Mid-Market,Finance,West,CA,120,35000000,2022-08-15
+C020,UnifiedComm Systems,Enterprise,Telecommunications,Southwest,TX,2200,410000000,2022-05-05
+C021,Vertex Pharmaceuticals,Enterprise,Healthcare,Northeast,MA,5500,1200000000,2022-01-10
+C022,WestCoast Media Group,Mid-Market,Media,West,CA,340,48000000,2022-06-28
+C023,XcelRate Marketing,SMB,Marketing,Southeast,NC,62,8100000,2022-09-05
+C024,YieldMax Agriculture,Mid-Market,Agriculture,Midwest,IA,280,42000000,2022-07-15
+C025,ZenithAero Dynamics,Enterprise,Aerospace,Southwest,TX,3800,680000000,2022-04-10
+C026,AlphaWave Electronics,Mid-Market,Technology,West,CA,225,32000000,2022-09-18
+C027,BrightPath Education,SMB,Education,Northeast,PA,48,5500000,2022-08-22
+C028,CrestView Insurance,Enterprise,Insurance,Midwest,OH,1950,350000000,2022-06-05
+C029,DeltaForce Security,SMB,Security,Southeast,GA,85,11000000,2022-10-01
+C030,EverGreen Solutions,Mid-Market,Environmental,West,OR,165,24000000,2022-09-25
+C031,Frontier Networks,Mid-Market,Telecommunications,Southwest,NV,310,45000000,2022-10-15
+C032,GlobalTrade Partners,Enterprise,Import/Export,Northeast,NY,1400,260000000,2022-07-28
+C033,HighPoint Analytics,SMB,Technology,West,WA,52,6800000,2022-11-02
+C034,Ironclad Manufacturing,Mid-Market,Manufacturing,Midwest,IN,485,62000000,2022-08-10
+C035,JadeStone Mining,Enterprise,Mining,West,NV,2800,520000000,2022-05-18
+C036,KinetIQ Sports,SMB,Sports/Recreation,Southeast,FL,42,5200000,2022-11-20
+C037,LuminaTech Displays,Mid-Market,Technology,West,CA,195,29000000,2022-10-08
+C038,MountainView Resorts,SMB,Hospitality,West,CO,78,9800000,2022-09-12
+C039,NexGen Robotics,Mid-Market,Technology,Northeast,MA,240,38000000,2022-11-28
+C040,OmniChannel Retail,Enterprise,Retail,Midwest,IL,3200,580000000,2022-08-25
+C041,PrimeCore Industries,Enterprise,Manufacturing,Southwest,TX,4100,750000000,2022-06-15
+C042,QuantumLeap Research,SMB,Research,West,CA,35,4500000,2022-12-05
+C043,RedHawk Defense,Enterprise,Defense,Northeast,VA,5200,980000000,2022-04-28
+C044,SilverLine Transport,Mid-Market,Transportation,Midwest,MO,380,52000000,2022-10-22
+C045,TrueNorth Navigation,SMB,Technology,West,WA,58,7200000,2022-12-15
+C046,UrbanSpace Developers,Mid-Market,Real Estate,Northeast,NY,145,22000000,2023-01-08
+C047,VeloCity Bikes,SMB,Retail,West,OR,32,3900000,2023-01-20
+C048,WaveRunner Marine,SMB,Marine,Southeast,FL,68,8500000,2023-02-05
+C049,XtremeGear Outdoors,SMB,Retail,West,CO,45,5800000,2023-02-18
+C050,YukonGold Resources,Mid-Market,Mining,West,AK,210,31000000,2023-01-15

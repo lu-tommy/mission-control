@@ -1,0 +1,45 @@
+#!/usr/bin/env python3
+"""
+Quick Resume Optimizer - Simple wrapper for easy use
+Usage: optimize-resume "paste job description here"
+"""
+
+import sys
+import subprocess
+from pathlib import Path
+
+def main():
+    if len(sys.argv) < 2:
+        print("📄 Quick Resume Optimizer")
+        print("="*50)
+        print("\nUsage:")
+        print("  optimize-resume \"paste job description here\"")
+        print("\nOr paste job description and press Ctrl+D:")
+        print("  optimize-resume")
+        print("\nOr from clipboard:")
+        print("  pbpaste | optimize-resume")
+        sys.exit(1)
+
+    job_desc = ' '.join(sys.argv[1:])
+
+    # Run the main optimizer
+    script_path = Path(__file__).parent / "resume-optimizer.py"
+    process = subprocess.Popen(
+        [sys.executable, str(script_path)],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        stderr=subprocess.PIPE,
+        text=True
+    )
+
+    stdout, stderr = process.communicate(input=job_desc)
+
+    if stdout:
+        print(stdout)
+    if stderr:
+        print(stderr, file=sys.stderr)
+
+    sys.exit(process.returncode)
+
+if __name__ == "__main__":
+    main()

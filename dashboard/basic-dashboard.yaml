@@ -1,0 +1,74 @@
+title: Basic
+icon: mdi:view-dashboard
+theme: default
+background: var(--lovelace-background)
+views:
+  - title: Home
+    path: basic-home
+    icon: mdi:home
+    badges: []
+    cards:
+      # Weather
+      - type: weather-forecast
+        entity: weather.forecast_home
+        show_current: true
+        show_forecast: true
+        forecast_type: daily
+        forecast_slots: 5
+
+      # Quick Actions
+      - type: horizontal-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: button
+            entity: scene.all_lights_off
+            icon: mdi:lightbulb-off
+            name: All Off
+          - type: custom:bubble-card
+            card_type: button
+            entity: scene.good_night
+            icon: mdi:weather-night
+            name: Good Night
+
+      # Lights Grid
+      - type: glance
+        show_name: true
+        show_state: true
+        columns: 3
+        entities:
+          - entity: light.front_door
+            name: Front Door
+            tap_action:
+              action: toggle
+          - entity: light.dining
+            name: Dining
+            tap_action:
+              action: toggle
+          - entity: light.living_room
+            name: Living Room
+            tap_action:
+              action: toggle
+          - entity: light.bathroom
+            name: Bathroom
+            tap_action:
+              action: toggle
+          - entity: light.tommys_room
+            name: Tommy's Room
+            tap_action:
+              action: toggle
+          - entity: light.moms_room
+            name: Mom's Room
+            tap_action:
+              action: toggle
+
+      # Light Sliders
+      - type: vertical-stack
+        cards:
+          - type: custom:bubble-card
+            card_type: button
+            button_type: slider
+            entity: light.living_room
+          - type: custom:bubble-card
+            card_type: button
+            button_type: slider
+            entity: light.tommys_room

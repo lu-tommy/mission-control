@@ -1,0 +1,22 @@
+{
+  "name": "larry-voice-chat",
+  "version": "1.0.0",
+  "description": "Voice-enabled chat interface for Larry the Lobster",
+  "main": "api-server.js",
+  "scripts": {
+    "start": "node api-server.js",
+    "dev": "node api-server.js"
+  },
+  "dependencies": {
+    "express": "^4.22.1",
+    "ws": "^8.19.0"
+  },
+  "keywords": [
+    "voice",
+    "chat",
+    "clawdbot",
+    "larry"
+  ],
+  "author": "Tommy Lu",
+  "license": "MIT"
+}

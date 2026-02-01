@@ -1,0 +1,427 @@
+title: My Home
+views:
+  # Header view
+  - title: Home
+    path: home
+    icon: mdi:home
+    badges:
+      - person.tommy_lu
+      - device_tracker.ipad
+      - device_tracker.macbook_air
+      - weather.forecast_home
+    cards:
+      # Weather & Time
+      - type: vertical-stack
+        cards:
+          - type: custom:mushroom-chips-card
+            alignment: center
+            chips:
+              - type: weather
+                entity: weather.forecast_home
+                show_temperature: true
+                show_conditions: true
+              - type: time
+              - type: entity
+                entity: sun.sun
+
+      # Quick Actions
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: switch.automation_coming_home
+            icon: mdi:home-outline
+            name: Home
+            tap_action:
+              action: call-service
+              service: automation.trigger
+              service_data:
+                entity_id: automation.coming_home
+          - type: custom:mushroom-entity-card
+            entity: switch.automation_wake_up
+            icon: mdi:weather-sunny
+            name: Wake Up
+            tap_action:
+              action: call-service
+              service: automation.trigger
+              service_data:
+                entity_id: automation.wake_up
+          - type: custom:mushroom-entity-card
+            entity: switch.automation_go_to_sleep
+            icon: mdi:weather-night
+            name: Sleep
+            tap_action:
+              action: call-service
+              service: automation.trigger
+              service_data:
+                entity_id: automation.go_to_sleep
+          - type: custom:mushroom-entity-card
+            entity: switch.automation_leaving_home
+            icon: mdi:exit-run
+            name: Away
+            tap_action:
+              action: call-service
+              service: automation.trigger
+              service_data:
+                entity_id: automation.leaving_home
+
+      # Family Status
+      - type: glance
+        show_name: true
+        columns: 3
+        entities:
+          - entity: person.tommy_lu
+          - entity: device_tracker.ipad
+          - entity: device_tracker.macbook_air
+
+  # Living Room View
+  - title: Living Room
+    path: living-room
+    icon: mdi:sofa
+    cards:
+      # Lights
+      - type: vertical-stack
+        cards:
+          - type: custom:mushroom-title-card
+            title: Lights
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.living_room
+                name: Living Room
+                icon: mdi:ceiling-light
+              - type: custom:mushroom-light-card
+                entity: light.hallway
+                name: Hallway
+                icon: mdi:wall-sconce
+              - type: custom:mushroom-light-card
+                entity: light.front_door
+                name: Front Door
+                icon: mdi:door
+
+          # Hue Play Bars
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-light-card
+                entity: light.hue_play_l
+                name: Hue Play Left
+                icon: mdi:strip-led
+              - type: custom:mushroom-light-card
+                entity: light.hue_play_r
+                name: Hue Play Right
+                icon: mdi:strip-led
+
+      # Scenes
+      - type: custom:mushroom-title-card
+        title: Scenes
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: scene.living_room_all_day_scene
+            name: All Day
+            icon: mdi:white-balance-sunny
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.living_room_all_day_scene
+          - type: custom:mushroom-entity-card
+            entity: scene.living_room_relax
+            name: Relax
+            icon: mdi:arm-flex
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.living_room_relax
+          - type: custom:mushroom-entity-card
+            entity: scene.living_room_nightlight
+            name: Night
+            icon: mdi:lightbulb-night
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.living_room_nightlight
+
+      # Media
+      - type: custom:mushroom-title-card
+        title: Media
+      - type: custom:mushroom-media-player-card
+        entity: media_player.tommy_tcl
+        name: Tommy TCL TV
+
+  # Dining Room View
+  - title: Dining
+    path: dining
+    icon: mdi:silverware-fork-knife
+    cards:
+      - type: vertical-stack
+        cards:
+          - type: custom:mushroom-title-card
+            title: Lights
+          - type: custom:mushroom-light-card
+            entity: light.dining
+            name: Dining Room
+            icon: mdi:ceiling-light
+            show_brightness_control: true
+            show_color_control: true
+
+      # Scenes
+      - type: custom:mushroom-title-card
+        title: Scenes
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: scene.dining_all_day_scene
+            name: All Day
+            icon: mdi:white-balance-sunny
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.dining_all_day_scene
+          - type: custom:mushroom-entity-card
+            entity: scene.dining_relax
+            name: Relax
+            icon: mdi:arm-flex
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.dining_relax
+          - type: custom:mushroom-entity-card
+            entity: scene.dining_read
+            name: Read
+            icon: mdi:book-open
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.dining_read
+
+  # Bathroom View
+  - title: Bathroom
+    path: bathroom
+    icon: mdi:shower
+    cards:
+      - type: custom:mushroom-light-card
+        entity: light.bathroom
+        name: Bathroom Light
+        icon: mdi:ceiling-light
+        show_brightness_control: true
+        show_color_control: true
+
+      - type: custom:mushroom-title-card
+        title: Scenes
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: scene.bathroom_concentrate
+            name: Concentrate
+            icon: mdi:brain
+            tap_action:
+              action: call-service
+              service: scene.turn_on
+              service_data:
+                entity_id: scene.bathroom_concentrate
+
+  # Bedroom View
+  - title: Bedroom
+    path: bedroom
+    icon: mdi:bed
+    cards:
+      # Climate Control (BedJet)
+      - type: custom:mushroom-title-card
+        title: Climate
+      - type: vertical-stack
+        cards:
+          - type: custom:mushroom-climate-card
+            entity: climate.bedjet
+            name: BedJet
+            icon: mdi:bed
+          - type: horizontal-stack
+            cards:
+              - type: custom:mushroom-entity-card
+                entity: sensor.bedjet_ambient_temperature
+                name: Temp
+                icon: mdi:thermometer
+              - type: custom:mushroom-entity-card
+                entity: fan.bedroom_fan
+                name: Fan
+                icon: mdi:fan
+
+      # Lights
+      - type: custom:mushroom-title-card
+        title: Lights
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-light-card
+            entity: light.bedroom_led_light
+            name: LED Light
+            icon: mdi:led-strip
+            show_brightness_control: true
+          - type: custom:mushroom-entity-card
+            entity: cover.left_blind
+            name: Left Blind
+            icon: mdi:blinds
+          - type: custom:mushroom-entity-card
+            entity: cover.right_blind
+            name: Right Blind
+            icon: mdi:blinds
+
+      # Air Quality
+      - type: custom:mushroom-title-card
+        title: Air Quality
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-entity-card
+            entity: sensor.bedroom_pm_2_5
+            name: PM 2.5
+            icon: mdi:air-filter
+          - type: custom:mushroom-entity-card
+            entity: sensor.bedroom_filter_life
+            name: Filter Life
+            icon: mdi:air-filter
+
+  # Tommy's Room
+  - title: Tommy's Room
+    path: tommys-room
+    icon: mdi:account
+    cards:
+      - type: custom:mushroom-title-card
+        title: Lights
+      - type: vertical-stack
+        cards:
+          - type: custom:mushroom-light-card
+            entity: light.tommys_room
+            name: Tommy's Room
+            icon: mdi:ceiling-light
+            show_brightness_control: true
+            show_color_control: true
+          - type: custom:mushroom-light-card
+            entity: light.tommy_ceiling_2
+            name: Ceiling
+            icon: mdi:ceiling-light
+
+      # Scenes
+      - type: custom:mushroom-title-card
+        title: Scenes
+      - type: custom:mushroom-entity-card
+        entity: scene.tommys_room_arctic_aurora
+        name: Arctic Aurora
+        icon: mdi:snowflake
+        tap_action:
+          action: call-service
+          service: scene.turn_on
+          service_data:
+            entity_id: scene.tommys_room_arctic_aurora
+
+      # Media
+      - type: custom:mushroom-title-card
+        title: Media
+      - type: custom:mushroom-media-player-card
+        entity: media_player.tommy_tcl_2
+        name: Tommy TCL TV
+
+  # Mom's Room
+  - title: Mom's Room
+    path: moms-room
+    icon: mdi:account-female
+    cards:
+      - type: horizontal-stack
+        cards:
+          - type: custom:mushroom-light-card
+            entity: light.moms_room
+            name: Mom's Room
+            icon: mdi:ceiling-light
+            show_brightness_control: true
+          - type: custom:mushroom-light-card
+            entity: light.moms_ceiling
+            name: Ceiling
+            icon: mdi:ceiling-light
+
+  # System Status
+  - title: System
+    path: system
+    icon: mdi:cog
+    cards:
+      # Updates
+      - type: custom:mushroom-title-card
+        title: Updates Available
+      - type: entities
+        entities:
+          - entity: update.home_assistant_core_update
+            name: Home Assistant
+          - entity: update.home_assistant_operating_system_update
+            name: HA OS
+          - entity: update.home_assistant_supervisor_update
+            name: Supervisor
+          - entity: update.hacs_update
+            name: HACS
+
+      # Backup Status
+      - type: custom:mushroom-title-card
+        title: Backups
+      - type: entities
+        entities:
+          - entity: sensor.backup_backup_manager_state
+            name: Backup State
+          - entity: sensor.backup_last_successful_automatic_backup
+            name: Last Backup
+          - entity: sensor.backup_next_scheduled_automatic_backup
+            name: Next Backup
+
+      # Network
+      - type: custom:mushroom-title-card
+        title: Network
+      - type: entities
+        entities:
+          - entity: binary_sensor.rt_ax82u_8a10_wan_status
+            name: Internet
+          - entity: sensor.ring_ring_ting_connection_type
+            name: Ring Connection
+
+      # Printer Status
+      - type: custom:mushroom-title-card
+        title: Printer
+      - type: entities
+        entities:
+          - entity: sensor.brother_printer_black_toner_remaining
+            name: Toner
+          - entity: sensor.brother_printer_drum_remaining_lifetime
+            name: Drum Life
+
+      # Shopping List
+      - type: custom:mushroom-title-card
+        title: Shopping List
+      - type: custom:mushroom-entity-card
+        entity: todo.shopping_list
+        name: Shopping
+        icon: mdi:cart
+        tap_action:
+          action: navigate
+          navigation_path: /shopping-list
+
+  # Automations
+  - title: Automations
+    path: automations
+    icon: mdi:robot
+    cards:
+      - type: custom:mushroom-title-card
+        title: Active Automations
+      - type: entities
+        entities:
+          - entity: switch.automation_coming_home
+          - entity: switch.automation_wake_up
+          - entity: switch.automation_go_to_sleep
+          - entity: switch.automation_leaving_home
+          - entity: automation.bedjet_auto_warm_on_cold_days
+
+      # All automations button
+      - type: custom:mushroom-entity-card
+        entity: automation.bedjet_auto_warm_on_cold_days
+        name: View All Automations
+        icon: mdi:view-dashboard
+        tap_action:
+          action: navigate
+          navigation_path: /config/automation

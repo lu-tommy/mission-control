@@ -1,0 +1,38 @@
+# Secrets
+kalshi-config.secret.json
+*.secret.json
+*.secret
+*.key
+
+# Trash & temp
+.trash/
+*-patch.json
+*-fix.json
+*.log
+*.tmp
+
+# Archive (optional - uncomment to ignore)
+# archive/
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Large external projects
+roleplay-bot/

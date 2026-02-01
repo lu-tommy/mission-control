@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Voice Chat Debug Test</title>
+    <style>
+        body { font-family: monospace; padding: 20px; }
+        button { padding: 10px 20px; margin: 10px; font-size: 16px; cursor: pointer; }
+        #log { 
+            background: #f0f0f0; 
+            border: 1px solid #ccc; 
+            padding: 10px; 
+            margin-top: 20px; 
+            white-space: pre-wrap; 
+            max-height: 400px; 
+            overflow-y: auto;
+        }
+        .error { color: red; }
+        .success { color: green; }
+        .info { color: blue; }
+    </style>
+</head>
+<body>
+    <h1>Voice Chat Debug Test</h1>
+    
+    <div>
+        <button onclick="testAPIHealth()">1. Test API Health</button>
+        <button onclick="testSpeechRecognition()">2. Test Speech Recognition</button>
+        <button onclick="testSendMessage()">3. Test Send Message</button>
+        <button onclick="clearLog()">Clear Log</button>
+    </div>
+    
+    <div id="log"></div>
+
+    <script>
+        function log(msg, type = 'info') {
+            const logDiv = document.getElementById('log');
+            const time = new Date().toLocaleTimeString();
+            const span = document.createElement('div');
+            span.className = type;
+            span.textContent = `[${time}] ${msg}`;
+            logDiv.appendChild(span);
+            logDiv.scrollTop = logDiv.scrollHeight;
+        }
+
+        function clearLog() {
+            document.getElementById('log').innerHTML = '';
+        }
+
+        // TEST 1: API Health Check
+        async function testAPIHealth() {
+            log('Testing API health at localhost:8889/api/health...');
+            try {
+                const response = await fetch('http://localhost:8889/api/health');
+                log(`Response status: ${response.status}`, response.ok ? 'success' : 'error');
+                const data = await response.json();
+                log(`Response body: ${JSON.stringify(data)}`, 'success');
+            } catch (err) {
+                log(`FETCH ERROR: ${err.message}`, 'error');
+                log(`Error type: ${err.name}`, 'error');
+                log('Possible causes: API not running, CORS issue, wrong port', 'error');
+            }
+        }
+
+        // TEST 2: Speech Recognition
+        function testSpeechRecognition() {
+            log('Testing Speech Recognition API...');
+            
+            if (!('webkitSpeechRecognition' in window) && !('SpeechRecognition' in window)) {
+                log('ERROR: Speech Recognition API not supported in this browser!', 'error');
+                log('Try Chrome or Edge', 'error');
+                return;
+            }
+            
+            log('Speech Recognition API is available', 'success');
+            
+            const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            const recognition = new SpeechRecognition();
+            
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = 'en-US';
+            
+            recognition.onstart = () => {
+                log('Speech recognition started - SPEAK NOW!', 'success');
+            };
+            
+            recognition.onresult = (event) => {
+                const transcript = event.results[0][0].transcript;
+                const isFinal = event.results[0].isFinal;
+                log(`Transcript (${isFinal ? 'FINAL' : 'interim'}): "${transcript}"`, isFinal ? 'success' : 'info');
+            };
+            
+            recognition.onerror = (event) => {
+                log(`Speech recognition error: ${event.error}`, 'error');
+                if (event.error === 'not-allowed') {
+                    log('Microphone permission denied! Check browser permissions.', 'error');
+                }
+            };
+            
+            recognition.onend = () => {
+                log('Speech recognition ended', 'info');
+            };
+            
+            try {
+                recognition.start();
+            } catch (err) {
+                log(`Failed to start recognition: ${err.message}`, 'error');
+            }
+        }
+
+        // TEST 3: Send Test Message to API
+        async function testSendMessage() {
+            const testMessage = "Hello, this is a test message";
+            log(`Sending test message to API: "${testMessage}"...`);
+            
+            try {
+                const response = await fetch('http://localhost:8889/api/chat', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ message: testMessage })
+                });
+                
+                log(`Response status: ${response.status}`, response.ok ? 'success' : 'error');
+                
+                const contentType = response.headers.get('content-type');
+                log(`Content-Type: ${contentType}`, 'info');
+                
+                if (contentType && contentType.includes('application/json')) {
+                    const data = await response.json();
+                    log(`Response: ${JSON.stringify(data, null, 2)}`, 'success');
+                } else {
+                    const text = await response.text();
+                    log(`Raw response: ${text.substring(0, 500)}`, 'info');
+                }
+            } catch (err) {
+                log(`FETCH ERROR: ${err.message}`, 'error');
+                log(`Error type: ${err.name}`, 'error');
+            }
+        }
+
+        // Initial log
+        log('Voice Chat Debug Test loaded');
+        log(`Browser: ${navigator.userAgent.split(' ').slice(-2).join(' ')}`);
+        log(`Speech API: ${('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) ? 'Available' : 'NOT AVAILABLE'}`, 
+            ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) ? 'success' : 'error');
+    </script>
+</body>
+</html>
+
+<div style="margin-top: 20px; padding: 15px; background: #1a1a2e; border-radius: 8px;">
+  <h3 style="color: #fff; margin-bottom: 10px;">💬 Text Fallback (if speech doesn't work)</h3>
+  <input type="text" id="textInput" placeholder="Type your message..." 
+    style="width: 70%; padding: 10px; border-radius: 5px; border: none; font-size: 16px;">
+  <button onclick="sendTextMessage()" 
+    style="padding: 10px 20px; background: #667eea; color: white; border: none; border-radius: 5px; cursor: pointer; margin-left: 10px;">
+    Send
+  </button>
+</div>
+
+<script>
+async function sendTextMessage() {
+  const input = document.getElementById('textInput');
+  const msg = input.value.trim();
+  if (!msg) return;
+  
+  log('Sending: ' + msg, 'info');
+  input.value = '';
+  
+  try {
+    const resp = await fetch('http://localhost:8889/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: msg })
+    });
+    const data = await resp.json();
+    log('Larry: ' + data.response, 'success');
+    
+    // Speak it
+    if ('speechSynthesis' in window) {
+      const utter = new SpeechSynthesisUtterance(data.response);
+      speechSynthesis.speak(utter);
+    }
+  } catch (e) {
+    log('Error: ' + e.message, 'error');
+  }
+}
+</script>

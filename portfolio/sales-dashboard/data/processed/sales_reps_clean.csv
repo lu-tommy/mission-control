@@ -1,0 +1,11 @@
+rep_id,rep_name,email,region,hire_date,quota_annual,manager
+R001,Sarah Chen,sarah.chen@techflow.com,West,2021-03-15,1200000,Jennifer Walsh
+R002,Michael Torres,michael.torres@techflow.com,Southwest,2021-06-01,1100000,Jennifer Walsh
+R003,Emily Johnson,emily.johnson@techflow.com,Northeast,2020-09-10,1400000,Robert Kim
+R004,David Park,david.park@techflow.com,Midwest,2022-01-20,950000,Robert Kim
+R005,Jessica Williams,jessica.williams@techflow.com,Southeast,2021-11-08,1000000,Jennifer Walsh
+R006,Ryan O'Connor,ryan.oconnor@techflow.com,Northeast,2020-05-18,1500000,Robert Kim
+R007,Amanda Foster,amanda.foster@techflow.com,West,2022-04-12,850000,Jennifer Walsh
+R008,James Mitchell,james.mitchell@techflow.com,Midwest,2021-08-25,1050000,Robert Kim
+R009,Lisa Nakamura,lisa.nakamura@techflow.com,West,2020-11-30,1350000,Jennifer Walsh
+R010,Kevin Brooks,kevin.brooks@techflow.com,Southeast,2022-07-05,800000,Robert Kim
