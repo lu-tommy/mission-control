@@ -1,0 +1,193 @@
+#!/bin/bash
+# q - Quick Capture CLI
+# Super fast capture for tasks, notes, reminders, and ideas
+
+set -e
+
+CLAWD_DIR="${HOME}/clawd"
+MEMORY_DIR="${CLAWD_DIR}/memory"
+DASHBOARD_DIR="${CLAWD_DIR}/dashboard"
+IDEAS_FILE="${CLAWD_DIR}/ideas.md"
+TASKS_FILE="${DASHBOARD_DIR}/tasks.json"
+
+# Get current timestamp
+timestamp() {
+    date "+%Y-%m-%d %H:%M"
+}
+
+# Get today's date for memory file
+today() {
+    date "+%Y-%m-%d"
+}
+
+# Parse duration string (2d, 1w, 3h) to a date for reminders
+parse_duration() {
+    local duration="$1"
+    local num="${duration%[dhwm]}"
+    local unit="${duration: -1}"
+    
+    case "$unit" in
+        h) date -v+"${num}H" "+%Y-%m-%d %H:%M" ;;
+        d) date -v+"${num}d" "+%Y-%m-%d" ;;
+        w) date -v+"${num}w" "+%Y-%m-%d" ;;
+        m) date -v+"${num}m" "+%Y-%m-%d" ;;  # months
+        *) echo "$duration" ;;  # assume it's already a date
+    esac
+}
+
+# Add task to dashboard backlog
+cmd_task() {
+    local title="$1"
+    if [[ -z "$title" ]]; then
+        echo "❌ Usage: q task \"task description\""
+        exit 1
+    fi
+    
+    # Generate a simple ID
+    local id="q-$(date +%s)"
+    local ts=$(timestamp)
+    
+    # Add to upNext in tasks.json using jq
+    if command -v jq &>/dev/null && [[ -f "$TASKS_FILE" ]]; then
+        local new_task=$(jq -n \
+            --arg id "$id" \
+            --arg title "$title" \
+            --arg desc "Added via q at $ts" \
+            '{id: $id, title: $title, priority: "medium", description: $desc}')
+        
+        jq --argjson task "$new_task" '.upNext += [$task]' "$TASKS_FILE" > "${TASKS_FILE}.tmp" \
+            && mv "${TASKS_FILE}.tmp" "$TASKS_FILE"
+        
+        echo "✅ Task added to backlog: \"$title\""
+    else
+        echo "❌ jq not found or tasks.json missing"
+        exit 1
+    fi
+}
+
+# Add note to today's memory file
+cmd_note() {
+    local note="$1"
+    if [[ -z "$note" ]]; then
+        echo "❌ Usage: q note \"note content\""
+        exit 1
+    fi
+    
+    local memory_file="${MEMORY_DIR}/$(today).md"
+    local ts=$(timestamp)
+    
+    # Create memory dir if needed
+    mkdir -p "$MEMORY_DIR"
+    
+    # If file doesn't exist, create with header
+    if [[ ! -f "$memory_file" ]]; then
+        echo "# $(today)" > "$memory_file"
+        echo "" >> "$memory_file"
+    fi
+    
+    # Append the note
+    echo "- [$ts] $note" >> "$memory_file"
+    
+    echo "📝 Note added to $(today).md"
+}
+
+# Create reminder via remindctl
+cmd_remind() {
+    local text="$1"
+    local when="$2"
+    
+    if [[ -z "$text" ]]; then
+        echo "❌ Usage: q remind \"reminder text\" [when]"
+        echo "   when: 2h, 1d, 2d, 1w, tomorrow, or a date"
+        exit 1
+    fi
+    
+    # Default to tomorrow if no time specified
+    if [[ -z "$when" ]]; then
+        when="1d"
+    fi
+    
+    # Parse the duration
+    local due_date=$(parse_duration "$when")
+    
+    # Use remindctl to add the reminder
+    if command -v remindctl &>/dev/null; then
+        remindctl add "$text" --due "$due_date" --quiet
+        echo "⏰ Reminder set for $due_date: \"$text\""
+    else
+        echo "❌ remindctl not found"
+        exit 1
+    fi
+}
+
+# Save idea to ideas.md
+cmd_idea() {
+    local idea="$1"
+    if [[ -z "$idea" ]]; then
+        echo "❌ Usage: q idea \"idea description\""
+        exit 1
+    fi
+    
+    local ts=$(timestamp)
+    
+    # Create file with header if doesn't exist
+    if [[ ! -f "$IDEAS_FILE" ]]; then
+        echo "# 💡 Ideas" > "$IDEAS_FILE"
+        echo "" >> "$IDEAS_FILE"
+        echo "Quick-captured ideas for future exploration." >> "$IDEAS_FILE"
+        echo "" >> "$IDEAS_FILE"
+    fi
+    
+    # Append the idea
+    echo "- [$ts] $idea" >> "$IDEAS_FILE"
+    
+    echo "💡 Idea saved: \"$idea\""
+}
+
+# Show help
+cmd_help() {
+    cat << 'EOF'
+q - Quick Capture CLI 🚀
+
+Usage:
+  q task "description"     Add task to dashboard backlog
+  q note "content"         Add note to today's memory file
+  q remind "text" [when]   Create Apple Reminder
+  q idea "description"     Save idea to ideas.md
+  q help                   Show this help
+
+Time formats for remind:
+  2h    2 hours from now
+  1d    1 day (tomorrow)
+  2d    2 days from now
+  1w    1 week from now
+  1m    1 month from now
+
+Examples:
+  q task "Build portfolio project"
+  q note "Remember to call recruiter"
+  q remind "Follow up on application" 2d
+  q idea "AI-powered resume matcher"
+EOF
+}
+
+# Main dispatcher
+main() {
+    local cmd="${1:-help}"
+    shift || true
+    
+    case "$cmd" in
+        task|t)    cmd_task "$@" ;;
+        note|n)    cmd_note "$@" ;;
+        remind|r)  cmd_remind "$@" ;;
+        idea|i)    cmd_idea "$@" ;;
+        help|--help|-h) cmd_help ;;
+        *)
+            echo "❌ Unknown command: $cmd"
+            echo "Run 'q help' for usage"
+            exit 1
+            ;;
+    esac
+}
+
+main "$@"

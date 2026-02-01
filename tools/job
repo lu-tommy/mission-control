@@ -1,0 +1,258 @@
+#!/bin/bash
+# Job Application Tracker
+# Usage: job add|status|update|followup
+
+TRACKER_FILE="$HOME/clawd/job-search/tracker.json"
+DASHBOARD_FILE="$HOME/clawd/dashboard/larry-status.json"
+
+# Ensure tracker exists
+if [[ ! -f "$TRACKER_FILE" ]]; then
+    mkdir -p "$(dirname "$TRACKER_FILE")"
+    echo '{"applications":[],"statuses":["discovered","applied","phone_screen","interview","offer","rejected"],"metadata":{"created":"'"$(date +%Y-%m-%d)"'","last_updated":"'"$(date +%Y-%m-%d)"'"}}' > "$TRACKER_FILE"
+fi
+
+update_dashboard() {
+    if [[ -f "$DASHBOARD_FILE" ]]; then
+        local total=$(jq '.applications | length' "$TRACKER_FILE")
+        local active=$(jq '[.applications[] | select(.status != "rejected" and .status != "offer")] | length' "$TRACKER_FILE")
+        local applied=$(jq '[.applications[] | select(.status == "applied")] | length' "$TRACKER_FILE")
+        local interviews=$(jq '[.applications[] | select(.status == "phone_screen" or .status == "interview")] | length' "$TRACKER_FILE")
+        local offers=$(jq '[.applications[] | select(.status == "offer")] | length' "$TRACKER_FILE")
+        local rejected=$(jq '[.applications[] | select(.status == "rejected")] | length' "$TRACKER_FILE")
+        
+        # Update dashboard with job stats
+        jq --argjson total "$total" \
+           --argjson active "$active" \
+           --argjson applied "$applied" \
+           --argjson interviews "$interviews" \
+           --argjson offers "$offers" \
+           --argjson rejected "$rejected" \
+           '.jobSearch = {
+               "total": $total,
+               "active": $active,
+               "applied": $applied,
+               "inProgress": $interviews,
+               "offers": $offers,
+               "rejected": $rejected,
+               "lastUpdated": "'"$(date -Iseconds)"'"
+           }' "$DASHBOARD_FILE" > "${DASHBOARD_FILE}.tmp" && mv "${DASHBOARD_FILE}.tmp" "$DASHBOARD_FILE"
+    fi
+}
+
+case "$1" in
+    add)
+        if [[ -z "$2" || -z "$3" ]]; then
+            echo "Usage: job add \"Company\" \"Role\" [\"URL\"]"
+            exit 1
+        fi
+        
+        COMPANY="$2"
+        ROLE="$3"
+        URL="${4:-}"
+        TODAY=$(date +%Y-%m-%d)
+        ID=$(date +%s)
+        
+        jq --arg company "$COMPANY" \
+           --arg role "$ROLE" \
+           --arg url "$URL" \
+           --arg date "$TODAY" \
+           --arg id "$ID" \
+           '.applications += [{
+               "id": $id,
+               "company": $company,
+               "role": $role,
+               "url": $url,
+               "status": "discovered",
+               "dateAdded": $date,
+               "dateApplied": null,
+               "resumeVersion": null,
+               "lastAction": $date,
+               "followUpDate": null,
+               "notes": []
+           }] | .metadata.last_updated = $date' "$TRACKER_FILE" > "${TRACKER_FILE}.tmp" && mv "${TRACKER_FILE}.tmp" "$TRACKER_FILE"
+        
+        echo "✅ Added: $COMPANY - $ROLE"
+        update_dashboard
+        ;;
+        
+    status)
+        echo ""
+        echo "📋 JOB APPLICATION TRACKER"
+        echo "═══════════════════════════════════════════════════════════════════════════"
+        printf "%-20s %-25s %-15s %-12s %-10s\n" "COMPANY" "ROLE" "STATUS" "APPLIED" "LAST ACTION"
+        echo "───────────────────────────────────────────────────────────────────────────"
+        
+        jq -r '.applications[] | select(.status != "rejected" and .status != "offer") | 
+            [.company[:19], .role[:24], .status, (.dateApplied // "-"), .lastAction] | 
+            @tsv' "$TRACKER_FILE" | while IFS=$'\t' read -r company role status applied lastaction; do
+            printf "%-20s %-25s %-15s %-12s %-10s\n" "$company" "$role" "$status" "$applied" "$lastaction"
+        done
+        
+        echo "───────────────────────────────────────────────────────────────────────────"
+        
+        # Stats
+        total=$(jq '.applications | length' "$TRACKER_FILE")
+        active=$(jq '[.applications[] | select(.status != "rejected" and .status != "offer")] | length' "$TRACKER_FILE")
+        offers=$(jq '[.applications[] | select(.status == "offer")] | length' "$TRACKER_FILE")
+        rejected=$(jq '[.applications[] | select(.status == "rejected")] | length' "$TRACKER_FILE")
+        
+        echo "Total: $total | Active: $active | Offers: $offers | Rejected: $rejected"
+        echo ""
+        ;;
+        
+    update)
+        if [[ -z "$2" || -z "$3" ]]; then
+            echo "Usage: job update \"Company\" <status>"
+            echo "Statuses: discovered, applied, phone_screen, interview, offer, rejected"
+            exit 1
+        fi
+        
+        COMPANY="$2"
+        NEW_STATUS="$3"
+        TODAY=$(date +%Y-%m-%d)
+        
+        # Validate status
+        VALID=$(jq -r '.statuses[]' "$TRACKER_FILE" | grep -x "$NEW_STATUS")
+        if [[ -z "$VALID" ]]; then
+            echo "❌ Invalid status: $NEW_STATUS"
+            echo "Valid: discovered, applied, phone_screen, interview, offer, rejected"
+            exit 1
+        fi
+        
+        # Update the application
+        if [[ "$NEW_STATUS" == "applied" ]]; then
+            jq --arg company "$COMPANY" \
+               --arg status "$NEW_STATUS" \
+               --arg date "$TODAY" \
+               '(.applications[] | select(.company == $company)) |= 
+                   (.status = $status | .lastAction = $date | .dateApplied = $date) |
+                .metadata.last_updated = $date' "$TRACKER_FILE" > "${TRACKER_FILE}.tmp" && mv "${TRACKER_FILE}.tmp" "$TRACKER_FILE"
+        else
+            jq --arg company "$COMPANY" \
+               --arg status "$NEW_STATUS" \
+               --arg date "$TODAY" \
+               '(.applications[] | select(.company == $company)) |= 
+                   (.status = $status | .lastAction = $date) |
+                .metadata.last_updated = $date' "$TRACKER_FILE" > "${TRACKER_FILE}.tmp" && mv "${TRACKER_FILE}.tmp" "$TRACKER_FILE"
+        fi
+        
+        echo "✅ Updated $COMPANY → $NEW_STATUS"
+        update_dashboard
+        ;;
+        
+    followup)
+        echo ""
+        echo "⏰ APPLICATIONS NEEDING FOLLOW-UP (>5 days since last action)"
+        echo "═══════════════════════════════════════════════════════════════════════════"
+        printf "%-20s %-25s %-15s %-12s %-10s\n" "COMPANY" "ROLE" "STATUS" "LAST ACTION" "DAYS AGO"
+        echo "───────────────────────────────────────────────────────────────────────────"
+        
+        TODAY_SEC=$(date +%s)
+        FIVE_DAYS=$((5 * 24 * 60 * 60))
+        
+        jq -r '.applications[] | select(.status != "rejected" and .status != "offer") | 
+            [.company, .role, .status, .lastAction] | @tsv' "$TRACKER_FILE" | while IFS=$'\t' read -r company role status lastaction; do
+            if [[ -n "$lastaction" && "$lastaction" != "null" ]]; then
+                LAST_SEC=$(date -j -f "%Y-%m-%d" "$lastaction" +%s 2>/dev/null || date -d "$lastaction" +%s 2>/dev/null)
+                DIFF=$((TODAY_SEC - LAST_SEC))
+                DAYS=$((DIFF / 86400))
+                if [[ $DIFF -gt $FIVE_DAYS ]]; then
+                    printf "%-20s %-25s %-15s %-12s %-10s\n" "${company:0:19}" "${role:0:24}" "$status" "$lastaction" "$DAYS days"
+                fi
+            fi
+        done
+        
+        echo ""
+        ;;
+        
+    note)
+        if [[ -z "$2" || -z "$3" ]]; then
+            echo "Usage: job note \"Company\" \"Note text\""
+            exit 1
+        fi
+        
+        COMPANY="$2"
+        NOTE="$3"
+        TODAY=$(date +%Y-%m-%d)
+        
+        jq --arg company "$COMPANY" \
+           --arg note "$NOTE" \
+           --arg date "$TODAY" \
+           '(.applications[] | select(.company == $company)).notes += [{"date": $date, "text": $note}] |
+            .metadata.last_updated = $date' "$TRACKER_FILE" > "${TRACKER_FILE}.tmp" && mv "${TRACKER_FILE}.tmp" "$TRACKER_FILE"
+        
+        echo "📝 Added note to $COMPANY"
+        ;;
+        
+    resume)
+        if [[ -z "$2" || -z "$3" ]]; then
+            echo "Usage: job resume \"Company\" \"resume-version\""
+            exit 1
+        fi
+        
+        COMPANY="$2"
+        RESUME="$3"
+        TODAY=$(date +%Y-%m-%d)
+        
+        jq --arg company "$COMPANY" \
+           --arg resume "$RESUME" \
+           --arg date "$TODAY" \
+           '(.applications[] | select(.company == $company)).resumeVersion = $resume |
+            .metadata.last_updated = $date' "$TRACKER_FILE" > "${TRACKER_FILE}.tmp" && mv "${TRACKER_FILE}.tmp" "$TRACKER_FILE"
+        
+        echo "📄 Set resume for $COMPANY: $RESUME"
+        ;;
+        
+    show)
+        if [[ -z "$2" ]]; then
+            echo "Usage: job show \"Company\""
+            exit 1
+        fi
+        
+        COMPANY="$2"
+        echo ""
+        jq -r --arg company "$COMPANY" '.applications[] | select(.company == $company) | 
+            "📋 \(.company) - \(.role)\n" +
+            "   Status: \(.status)\n" +
+            "   URL: \(.url // "N/A")\n" +
+            "   Added: \(.dateAdded)\n" +
+            "   Applied: \(.dateApplied // "Not yet")\n" +
+            "   Resume: \(.resumeVersion // "Not set")\n" +
+            "   Last Action: \(.lastAction)\n" +
+            "   Notes: \(if .notes | length > 0 then (.notes | map("     - [\(.date)] \(.text)") | join("\n")) else "None" end)"' "$TRACKER_FILE"
+        echo ""
+        ;;
+        
+    list)
+        echo ""
+        echo "📋 ALL APPLICATIONS"
+        echo "═══════════════════════════════════════════════════════════════════════════"
+        printf "%-20s %-25s %-15s %-12s\n" "COMPANY" "ROLE" "STATUS" "APPLIED"
+        echo "───────────────────────────────────────────────────────────────────────────"
+        
+        jq -r '.applications[] | [.company[:19], .role[:24], .status, (.dateApplied // "-")] | @tsv' "$TRACKER_FILE" | \
+            while IFS=$'\t' read -r company role status applied; do
+                printf "%-20s %-25s %-15s %-12s\n" "$company" "$role" "$status" "$applied"
+            done
+        
+        echo ""
+        ;;
+        
+    *)
+        echo "Job Application Tracker"
+        echo ""
+        echo "Usage: job <command> [args]"
+        echo ""
+        echo "Commands:"
+        echo "  add \"Company\" \"Role\" [\"URL\"]  - Add new application"
+        echo "  status                          - Show active applications"
+        echo "  update \"Company\" <status>       - Update status"
+        echo "  followup                        - Show apps needing follow-up"
+        echo "  note \"Company\" \"Note\"           - Add a note"
+        echo "  resume \"Company\" \"version\"      - Set resume version"
+        echo "  show \"Company\"                  - Show full details"
+        echo "  list                            - Show all applications"
+        echo ""
+        echo "Statuses: discovered → applied → phone_screen → interview → offer/rejected"
+        ;;
+esac

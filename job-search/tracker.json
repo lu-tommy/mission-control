@@ -1,0 +1,8 @@
+{
+  "applications": [],
+  "statuses": ["discovered", "applied", "phone_screen", "interview", "offer", "rejected"],
+  "metadata": {
+    "created": "2025-07-19",
+    "last_updated": "2025-07-19"
+  }
+}
