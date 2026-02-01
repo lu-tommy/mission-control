@@ -41,12 +41,6 @@
       "title": "SPY benchmark improvement",
       "priority": "low",
       "description": "Research better benchmarking strategies"
-    },
-    {
-      "id": "q-1769924811",
-      "title": "Test task from q command",
-      "priority": "medium",
-      "description": "Added via q at 2026-02-01 00:46"
     }
   ]
 }
