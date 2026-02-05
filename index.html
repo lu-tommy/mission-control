@@ -3039,13 +3039,14 @@
         };
         async function loadTasksFromGitHub() {
             if (!STATE.token) {
-                console.log('No token, using fallback data');
-                STATE.data = JSON.parse(JSON.stringify(FALLBACK_DATA));
+                console.log('No token, using local fallback data');
+                STATE.data = await loadLocalFallback();
+                renderAll();
                 return;
             }
 
             STATE.isLoading = true;
-            showToast('success', '📥 Loading tasks from GitHub...');
+            showToast('info', '📥 Loading tasks from GitHub...');
 
             try {
                 const response = await fetch(
@@ -3053,13 +3054,15 @@
                     {
                         headers: {
                             'Authorization': `token ${STATE.token}`,
-                            'Accept': 'application/vnd.github.v3+json'
-                        }
+                            'Accept': 'application/vnd.github.v3+json',
+                            'Cache-Control': 'no-cache'
+                        },
+                        cache: 'no-store'
                     }
                 );
 
                 if (!response.ok) {
-                    throw new Error('Could not load tasks file');
+                    throw new Error(`GitHub API error: ${response.status}`);
                 }
 
                 const fileData = await response.json();
@@ -3072,13 +3075,13 @@
                 STATE.originalData = JSON.parse(JSON.stringify(data));
                 STATE.fileSha = fileData.sha;  // Needed for updates
 
-                console.log('Loaded tasks from GitHub:', data.tasks.length, 'tasks');
-                showToast('success', `✓ Loaded ${data.tasks.length} tasks from GitHub`);
+                console.log('Loaded tasks from GitHub:', data.tasks?.length || 0, 'tasks');
+                showToast('success', `✓ Loaded ${data.tasks?.length || 0} tasks from GitHub`);
 
             } catch (error) {
                 console.error('Error loading from GitHub:', error);
-                showToast('error', 'Could not load from GitHub, using cached data');
-                STATE.data = JSON.parse(JSON.stringify(FALLBACK_DATA));
+                showToast('warning', 'GitHub sync failed, using local data');
+                STATE.data = await loadLocalFallback();
             }
 
             STATE.isLoading = false;
@@ -6890,32 +6893,95 @@
                 }
             }
 
+            // Always show dashboard, even without token (use local fallback)
+            showDashboard();
+
             if (!token) {
-                showLoginScreen();
+                console.log('No token found, using local fallback data');
+                STATE.data = await loadLocalFallback();
+                renderAll();
                 return;
             }
 
             // Validate token
             try {
                 const response = await fetch('https://api.github.com/user', {
-                    headers: { 'Authorization': `token ${token}` }
+                    headers: { 'Authorization': `token ${token}` },
+                    cache: 'no-store'
                 });
 
                 if (response.ok) {
                     const user = await response.json();
                     STATE.token = token;
                     STATE.user = user;
-                    showDashboard();
+                    // Update user UI
+                    document.getElementById('btn-connect').style.display = 'none';
+                    document.getElementById('user-profile').style.display = 'flex';
+                    document.getElementById('user-avatar').src = user.avatar_url;
+                    document.getElementById('user-name').textContent = user.login;
                     await loadTasksFromGitHub();
                     await loadCronsFromGitHub(); // Load data after auth
-                } else {
+                } else if (response.status === 401) {
+                    // Token is invalid - remove it
+                    console.warn('Token invalid (401), removing from storage');
                     localStorage.removeItem('gh_token');
-                    showLoginScreen();
+                    STATE.token = null;
+                    STATE.user = null;
+                    STATE.data = await loadLocalFallback();
+                    renderAll();
+                    showToast('warning', 'Token expired. Please re-login.');
+                } else {
+                    // Other error - keep token, use local data
+                    console.warn('GitHub API error:', response.status);
+                    STATE.data = await loadLocalFallback();
+                    renderAll();
                 }
             } catch (e) {
                 console.error('Auth check failed:', e);
-                showLoginScreen();
+                // Network error - don't clear token, use local data
+                STATE.data = await loadLocalFallback();
+                renderAll();
+                showToast('info', 'Using local data (GitHub unreachable)');
             }
+        }
+
+        // Load data from GitHub (works for public repos without token)
+        async function loadPublicGitHubData() {
+            try {
+                // Try GitHub raw URL first (no auth needed for public repos)
+                const rawUrl = `https://raw.githubusercontent.com/${CONFIG.owner}/${CONFIG.repo}/${CONFIG.branch}/${CONFIG.tasksFile}`;
+                const response = await fetch(rawUrl, { cache: 'no-store' });
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Loaded public GitHub data:', data.tasks?.length || 0, 'tasks');
+                    return data;
+                }
+            } catch (e) {
+                console.warn('Could not load from GitHub raw:', e);
+            }
+            return null;
+        }
+
+        // Load local fallback data (for local development)
+        async function loadLocalFallback() {
+            // First try GitHub public data
+            const githubData = await loadPublicGitHubData();
+            if (githubData) return githubData;
+
+            // Then try local file (for local dev)
+            try {
+                const response = await fetch('data/tasks.json');
+                if (response.ok) {
+                    const data = await response.json();
+                    console.log('Loaded local fallback data:', data.tasks?.length, 'tasks');
+                    return data;
+                }
+            } catch (e) {
+                console.warn('Could not load local fallback:', e);
+            }
+            // If all else fails, use FALLBACK_DATA
+            console.log('Using sample FALLBACK_DATA');
+            return JSON.parse(JSON.stringify(FALLBACK_DATA));
         }
 
         function showLoginScreen() {
@@ -6933,6 +6999,10 @@
                 document.getElementById('user-profile').style.display = 'flex';
                 document.getElementById('user-avatar').src = STATE.user.avatar_url;
                 document.getElementById('user-name').textContent = STATE.user.login;
+            } else {
+                // Show connect button for guest users
+                document.getElementById('btn-connect').style.display = 'inline-flex';
+                document.getElementById('user-profile').style.display = 'none';
             }
         }
 
