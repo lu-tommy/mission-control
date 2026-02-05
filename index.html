@@ -3075,6 +3075,9 @@
                 STATE.originalData = JSON.parse(JSON.stringify(data));
                 STATE.fileSha = fileData.sha;  // Needed for updates
 
+                // Cache data for offline/network errors
+                localStorage.setItem('mc_cached_data', JSON.stringify(data));
+
                 console.log('Loaded tasks from GitHub:', data.tasks?.length || 0, 'tasks');
                 showToast('success', `✓ Loaded ${data.tasks?.length || 0} tasks from GitHub`);
 
@@ -6893,13 +6896,9 @@
                 }
             }
 
-            // Always show dashboard, even without token (use local fallback)
-            showDashboard();
-
             if (!token) {
-                console.log('No token found, using local fallback data');
-                STATE.data = await loadLocalFallback();
-                renderAll();
+                // No token - show login screen
+                showLoginScreen();
                 return;
             }
 
@@ -6914,34 +6913,50 @@
                     const user = await response.json();
                     STATE.token = token;
                     STATE.user = user;
-                    // Update user UI
-                    document.getElementById('btn-connect').style.display = 'none';
-                    document.getElementById('user-profile').style.display = 'flex';
-                    document.getElementById('user-avatar').src = user.avatar_url;
-                    document.getElementById('user-name').textContent = user.login;
+                    showDashboard();
                     await loadTasksFromGitHub();
                     await loadCronsFromGitHub(); // Load data after auth
                 } else if (response.status === 401) {
-                    // Token is invalid - remove it
-                    console.warn('Token invalid (401), removing from storage');
+                    // Invalid token - remove it
+                    console.warn('Token invalid (401), clearing localStorage');
                     localStorage.removeItem('gh_token');
-                    STATE.token = null;
-                    STATE.user = null;
-                    STATE.data = await loadLocalFallback();
-                    renderAll();
-                    showToast('warning', 'Token expired. Please re-login.');
+                    showLoginScreen();
                 } else {
-                    // Other error - keep token, use local data
-                    console.warn('GitHub API error:', response.status);
-                    STATE.data = await loadLocalFallback();
+                    // Other GitHub errors (403, 429, 500) - keep token, try to show dashboard
+                    console.warn('GitHub API error:', response.status, '- keeping token');
+                    STATE.token = token;
+                    STATE.user = null;
+                    showDashboard();
+                    STATE.data = JSON.parse(JSON.stringify(FALLBACK_DATA));
                     renderAll();
+                    showToast('warning', `GitHub API error (${response.status}) - using sample data`);
                 }
             } catch (e) {
-                console.error('Auth check failed:', e);
-                // Network error - don't clear token, use local data
-                STATE.data = await loadLocalFallback();
+                // Network error - DON'T clear token! Try cached data first, then fallback
+                console.error('Network error during auth check:', e.message);
+                STATE.token = token;
+                STATE.user = null;
+
+                // Try to use cached data from localStorage
+                const cached = localStorage.getItem('mc_cached_data');
+                if (cached) {
+                    try {
+                        STATE.data = JSON.parse(cached);
+                        console.log('Using cached data from localStorage');
+                        showDashboard();
+                        renderAll();
+                        showToast('info', 'Using cached data (network error)');
+                        return;
+                    } catch (parseError) {
+                        console.warn('Cached data invalid, using fallback');
+                    }
+                }
+
+                // No cache - use fallback
+                showDashboard();
+                STATE.data = JSON.parse(JSON.stringify(FALLBACK_DATA));
                 renderAll();
-                showToast('info', 'Using local data (GitHub unreachable)');
+                showToast('info', 'Network error - using sample data (login preserved)');
             }
         }
 
