@@ -1,16 +1,14 @@
 {
-  "version": "1.0.0",
-  "lastUpdated": "2026-02-05T13:05:00-05:00",
-  "columns": ["permanent", "backlog", "in_progress", "review", "done"],
   "tasks": [
     {
       "id": "MC-001",
       "title": "Review daily trading bot performance",
       "description": "Check MAG7 and Forex bot status, review logs for errors, analyze P/L",
       "status": "permanent",
+      "project": "trading",
+      "tags": ["trading", "daily"],
       "priority": "high",
       "subtasks": [],
-      "dod": "Status checked, any errors identified and logged or fixed",
       "comments": [],
       "createdAt": "2026-02-05T11:30:00-05:00"
     },
@@ -19,13 +17,14 @@
       "title": "Apply to 3 high-paying remote jobs ($100k+)",
       "description": "Find and apply to remote job opportunities matching skills and experience",
       "status": "backlog",
+      "project": "career",
+      "tags": ["career", "jobs"],
       "priority": "high",
       "subtasks": [
-        {"id": "MC-002-001", "title": "Search job boards for relevant positions", "done": false},
-        {"id": "MC-002-002", "title": "Tailor resume for top 3 positions", "done": false},
-        {"id": "MC-002-003", "title": "Submit applications with cover letters", "done": false}
+        {"id": "sub_001", "title": "Search job boards for relevant positions", "done": false},
+        {"id": "sub_002", "title": "Tailor resume for top 3 positions", "done": false},
+        {"id": "sub_003", "title": "Submit applications with cover letters", "done": false}
       ],
-      "dod": "3 applications submitted with confirmation emails received",
       "comments": [],
       "createdAt": "2026-02-05T11:30:00-05:00"
     },
@@ -34,16 +33,15 @@
       "title": "Financial Freedom Research: Passive Income Streams",
       "description": "Research dividend stocks, REITs, and side hustles for generating passive income",
       "status": "review",
+      "project": "finance",
+      "tags": ["finance", "research"],
       "priority": "medium",
       "subtasks": [
-        {"id": "MC-003-001", "title": "Research dividend stock strategies", "done": true},
-        {"id": "MC-003-002", "title": "Research REIT investment options", "done": true},
-        {"id": "MC-003-003", "title": "Document findings in research file", "done": true}
+        {"id": "sub_001", "title": "Research dividend stock strategies", "done": true},
+        {"id": "sub_002", "title": "Research REIT investment options", "done": true},
+        {"id": "sub_003", "title": "Document findings in research file", "done": true}
       ],
-      "dod": "Research documented in notes/areas/financial-freedom-research.md",
-      "comments": [
-        {"id": "C001", "text": "Initial research completed - placeholders for real data", "timestamp": "2026-02-05T04:00:00-05:00"}
-      ],
+      "comments": [],
       "createdAt": "2026-02-05T11:30:00-05:00"
     },
     {
@@ -51,12 +49,13 @@
       "title": "Plan Valentine's Day for Daliah (Austria)",
       "description": "Order flowers/gifts for delivery to Daliah in Austria before Feb 14",
       "status": "backlog",
+      "project": "personal",
+      "tags": ["personal", "daliah"],
       "priority": "high",
       "subtasks": [
-        {"id": "MC-004-001", "title": "Browse delivery options from research notes", "done": false},
-        {"id": "MC-004-002", "title": "Select and order flowers/gift", "done": false}
+        {"id": "sub_001", "title": "Browse delivery options from research notes", "done": false},
+        {"id": "sub_002", "title": "Select and order flowers/gift", "done": false}
       ],
-      "dod": "Order placed with delivery confirmation for Feb 14",
       "comments": [],
       "createdAt": "2026-02-05T11:30:00-05:00"
     },
@@ -65,16 +64,23 @@
       "title": "Fix overnight script: financial-research.sh",
       "description": "Fix $10k variable expansion issue in budget lines",
       "status": "done",
+      "project": "devops",
+      "tags": ["devops", "bugfix"],
       "priority": "medium",
       "subtasks": [
-        {"id": "MC-005-001", "title": "Escaped dollar signs in budget lines", "done": true},
-        {"id": "MC-005-002", "title": "Test script execution", "done": true}
+        {"id": "sub_001", "title": "Escaped dollar signs in budget lines", "done": true},
+        {"id": "sub_002", "title": "Test script execution", "done": true}
       ],
-      "dod": "Script runs without errors, output generated successfully",
-      "comments": [
-        {"id": "C002", "text": "Fixed - changed $10k to \\$10k", "timestamp": "2026-02-05T05:05:00-05:00"}
-      ],
+      "comments": [],
       "createdAt": "2026-02-05T11:30:00-05:00"
     }
-  ]
+  ],
+  "projects": [
+    {"id": "trading", "name": "Trading", "icon": "📈", "color": "#10b981"},
+    {"id": "career", "name": "Career", "icon": "💼", "color": "#3b82f6"},
+    {"id": "finance", "name": "Finance", "icon": "💰", "color": "#f59e0b"},
+    {"id": "personal", "name": "Personal", "icon": "❤️", "color": "#ef4444"},
+    {"id": "devops", "name": "DevOps", "icon": "🔧", "color": "#8b5cf6"}
+  ],
+  "activities": []
 }

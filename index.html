@@ -3340,7 +3340,7 @@
                 document.getElementById('validated-user').textContent = user.login;
 
                 // Save to localStorage
-                localStorage.setItem('github_token', token);
+                localStorage.setItem('gh_token', token);
                 localStorage.setItem('github_user', JSON.stringify({
                     login: user.login,
                     avatar_url: user.avatar_url,
@@ -3371,7 +3371,7 @@
         }
 
         function logout() {
-            localStorage.removeItem('github_token');
+            localStorage.removeItem('gh_token');
             localStorage.removeItem('github_user');
             STATE.token = null;
             STATE.user = null;
@@ -3399,7 +3399,7 @@
         }
 
         function checkSavedAuth() {
-            const token = localStorage.getItem('github_token');
+            const token = localStorage.getItem('gh_token');
             const userJson = localStorage.getItem('github_user');
 
             if (token && userJson) {
@@ -6636,7 +6636,7 @@
                 </div>
             `;
 
-            const token = STATE.token || localStorage.getItem('github_token');
+            const token = STATE.token || localStorage.getItem('gh_token');
 
             if (!token) {
                 container.innerHTML = `
@@ -6879,11 +6879,11 @@
             // Check both old and new token keys, migrate if needed
             let token = localStorage.getItem('gh_token');
             if (!token) {
-                const oldToken = localStorage.getItem('github_token');
+                const oldToken = localStorage.getItem('gh_token');
                 if (oldToken) {
                     // Migrate old token to new key
                     localStorage.setItem('gh_token', oldToken);
-                    localStorage.removeItem('github_token');
+                    localStorage.removeItem('gh_token');
                     localStorage.removeItem('github_user'); // Clean up old user data
                     token = oldToken;
                     console.log('Migrated token from github_token to gh_token');
