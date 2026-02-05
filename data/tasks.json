@@ -41,13 +41,15 @@
         {"id": "sub_002", "title": "Research REIT investment options", "done": true},
         {"id": "sub_003", "title": "Document findings in research file", "done": true}
       ],
-      "comments": [],
+      "comments": [
+        {"author": "Larry 🦞", "text": "Completed initial research on dividend strategies and REITs", "timestamp": "2026-02-05T04:00:00-05:00"}
+      ],
       "createdAt": "2026-02-05T11:30:00-05:00"
     },
     {
       "id": "MC-004",
       "title": "Plan Valentine's Day for Daliah (Austria)",
-      "description": "Order flowers/gifts for delivery to Daliah in Austria before Feb 14",
+      "description": "Order flowers/gifts for delivery to Daliah in Austria before Feb 14. Research notes at: notes/daliah-austria-delivery-research.md",
       "status": "backlog",
       "project": "personal",
       "tags": ["personal", "daliah"],
@@ -56,7 +58,9 @@
         {"id": "sub_001", "title": "Browse delivery options from research notes", "done": false},
         {"id": "sub_002", "title": "Select and order flowers/gift", "done": false}
       ],
-      "comments": [],
+      "comments": [
+        {"author": "Larry 🦞", "text": "Researched Austrian flower delivery options - see notes/daliah-austria-delivery-research.md", "timestamp": "2026-02-04T15:00:00-05:00"}
+      ],
       "createdAt": "2026-02-05T11:30:00-05:00"
     },
     {
@@ -71,7 +75,10 @@
         {"id": "sub_001", "title": "Escaped dollar signs in budget lines", "done": true},
         {"id": "sub_002", "title": "Test script execution", "done": true}
       ],
-      "comments": [],
+      "comments": [
+        {"author": "Larry 🦞", "text": "Fixed - changed $10k to \\$10k in budget lines", "timestamp": "2026-02-05T05:05:00-05:00"}
+      ],
+      "completedAt": "2026-02-05T05:10:00-05:00",
       "createdAt": "2026-02-05T11:30:00-05:00"
     }
   ],
@@ -82,5 +89,12 @@
     {"id": "personal", "name": "Personal", "icon": "❤️", "color": "#ef4444"},
     {"id": "devops", "name": "DevOps", "icon": "🔧", "color": "#8b5cf6"}
   ],
-  "activities": []
+  "activities": [
+    {"type": "completed", "actor": "Larry 🦞", "task": "Fix overnight script: financial-research.sh", "time": "3 hours ago"},
+    {"type": "moved", "actor": "Larry 🦞", "task": "Financial Freedom Research", "from": "in_progress", "to": "review", "time": "8 hours ago"},
+    {"type": "created", "actor": "Larry 🦞", "task": "Plan Valentine's Day for Daliah", "time": "yesterday"},
+    {"type": "created", "actor": "Larry 🦞", "task": "Apply to 3 high-paying remote jobs", "time": "yesterday"},
+    {"type": "created", "actor": "Larry 🦞", "task": "Review daily trading bot performance", "time": "yesterday"},
+    {"type": "created", "actor": "Tommy", "task": "Mission Control setup", "time": "2 days ago"}
+  ]
 }
