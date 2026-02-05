@@ -3340,8 +3340,8 @@
                 document.getElementById('validated-user').textContent = user.login;
 
                 // Save to localStorage
-                localStorage.setItem('github_token', token);
-                localStorage.setItem('github_user', JSON.stringify({
+                localStorage.setItem('gh_token', token);
+                localStorage.setItem('gh_user', JSON.stringify({
                     login: user.login,
                     avatar_url: user.avatar_url,
                     name: user.name || user.login
@@ -3371,8 +3371,8 @@
         }
 
         function logout() {
-            localStorage.removeItem('github_token');
-            localStorage.removeItem('github_user');
+            localStorage.removeItem('gh_token');
+            localStorage.removeItem('gh_user');
             STATE.token = null;
             STATE.user = null;
             STATE.data = JSON.parse(JSON.stringify(FALLBACK_DATA));
@@ -3399,8 +3399,8 @@
         }
 
         function checkSavedAuth() {
-            const token = localStorage.getItem('github_token');
-            const userJson = localStorage.getItem('github_user');
+            const token = localStorage.getItem('gh_token');
+            const userJson = localStorage.getItem('gh_user');
 
             if (token && userJson) {
                 STATE.token = token;
@@ -6636,7 +6636,7 @@
                 </div>
             `;
 
-            const token = STATE.token || localStorage.getItem('github_token');
+            const token = STATE.token || localStorage.getItem('gh_token');
 
             if (!token) {
                 container.innerHTML = `
